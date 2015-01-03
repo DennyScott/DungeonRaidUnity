@@ -1,15 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ElementModel : MonoBehaviour {
+public class ElementModel : GamePieceModel {
 
-	// Use this for initialization
-	void Start () {
-	
+	public enum ElementType {	
+		FIRE, EARTH, AIR, WATER
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public ElementType type{
+		get { return type; }
+		set { type = value; }
 	}
+
+	public int baseDamage {
+		get { return baseDamage; }
+		set { baseDamage = value; }
+	}
+
+	public ElementModel(GameObject go, ElementType et, int dmg) : base(go){
+		type = et;
+		baseDamage = dmg;
+	}	
 }

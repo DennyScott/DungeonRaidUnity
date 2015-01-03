@@ -1,15 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GamePieceModel : MonoBehaviour {
+public class GamePieceModel {
 
-	// Use this for initialization
-	void Start () {
-	
+	public GameObject go;
+
+	public int x {
+		get { return x; }
+		set { x = value; }
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public int y {
+		get { return y; }
+		set { y = value; }
+	}
+
+	public GamePieceModel(GameObject temp) {
+		this.go = temp;
+	}
+
+	public void destory () {
+		GameObject.Destroy(go);
 	}
 }
