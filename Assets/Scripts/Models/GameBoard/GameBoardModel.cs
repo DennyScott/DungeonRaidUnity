@@ -7,4 +7,8 @@ public class GameBoardModel : MonoBehaviour {
 	private List<List<ElementModel> y;
 	private List<ElementModel> x;
 
+	public GameBoardModel() {
+
+	}
+
 }
