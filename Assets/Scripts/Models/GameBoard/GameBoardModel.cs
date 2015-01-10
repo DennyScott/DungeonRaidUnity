@@ -4,27 +4,11 @@ using System.Collections.Generic;
 
 public class GameBoardModel {
 
-	private List<List<GamePieceModel>> rows;
+    private List<List<GamePieceModel>> rows;
 
-	public GameBoardModel() {
+    public GameBoardModel() {
         rows = new List<List<GamePieceModel>>();
         CreateGameBoard();
-    }
-
-    private void CreateGameBoard() {
-        for (int i = 0; i < GameBoardConstants.ROWS; i++) {
-            rows.Add(CreateRow());
-        }
-    }
-
-    private List<GamePieceModel> CreateRow(){
-        List<GamePieceModel> row = new List<GamePieceModel>();
-        
-        for (int i = 0; i < GameBoardConstants.COLUMNS; i++) {
-            row.Add(new GamePieceModel(new GameObject()));
-        }
-
-        return row;
     }
 
     public List<List<GamePieceModel>> GetRows() {
@@ -42,5 +26,28 @@ public class GameBoardModel {
     public GamePieceModel GetGamePiece(int y, int x){
         return rows[y][x];
     }
+
+    public GamePieceModel RemoveGamePiece(int y, int x){
+
+    }
+
+
+
+    private void CreateGameBoard() {
+        for (int i = 0; i < GameBoardConstants.ROWS; i++) {
+            rows.Add(CreateRow());
+        }
+    }
+
+    private List<GamePieceModel> CreateRow(){
+        List<GamePieceModel> row = new List<GamePieceModel>();
+
+        for (int i = 0; i < GameBoardConstants.COLUMNS; i++) {
+            row.Add(new GamePieceModel(new GameObject()));
+        }
+
+        return row;
+    }
+
 
 }
