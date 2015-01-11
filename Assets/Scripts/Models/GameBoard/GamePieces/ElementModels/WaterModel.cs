@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GoldModel : GamePieceModel {
+public class WaterModel : ElementModel {
 	
 }

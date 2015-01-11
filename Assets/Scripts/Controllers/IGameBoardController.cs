@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public interface IGameBoardManager {
+public interface IGameBoardController {
 
     bool CheckForMatch(GamePieceModel from, GamePieceModel to);
 

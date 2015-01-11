@@ -15,6 +15,10 @@ public class GamePieceModel {
 		set { y = value; }
 	}
 
+	public GamePieceModel() {
+
+	}
+
 	public GamePieceModel(GameObject temp) {
 		this.go = temp;
 	}
