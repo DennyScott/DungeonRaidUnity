@@ -3,27 +3,24 @@ using System.Collections;
 
 public class GamePieceModel {
 
-	public GameObject go;
+    private int _x, _y;
 
-	public int x {
-		get { return x; }
-		set { x = value; }
+    public int x {
+		get { return _x; }
+		set { _x = value; }
 	}
 
 	public int y {
-		get { return y; }
-		set { y = value; }
+		get { return _y; }
+		set { _y = value; }
 	}
 
-	public GamePieceModel() {
-
+	public GamePieceModel(int row, int column) {
+        y = row;
+        x = column;
 	}
 
-	public GamePieceModel(GameObject temp) {
-		this.go = temp;
-	}
-
-	public void destory () {
-		GameObject.Destroy(go);
-	}
+    public GamePieceModel() {
+        
+    }
 }

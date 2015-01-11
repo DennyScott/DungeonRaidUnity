@@ -13,7 +13,7 @@ public class GameBoardTest {
     [SetUp]
     public void Init() {
         gameboard = new GameBoardModel();
-        gamePiece = new GamePieceModel(new GameObject());
+        gamePiece = new GamePieceModel();
     }
 
     [Test]

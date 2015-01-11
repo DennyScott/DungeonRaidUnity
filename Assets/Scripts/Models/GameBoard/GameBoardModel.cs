@@ -29,6 +29,8 @@ public class GameBoardModel : IGameBoard {
     }
 
     public void AddGamePiece(GamePieceModel gp, int y, int x){
+        gp.x = x;
+        gp.y = y;
         rows[y][x] = gp;
     }
 
@@ -50,15 +52,15 @@ public class GameBoardModel : IGameBoard {
 
     private void CreateGameBoard() {
         for (int i = 0; i < GameBoardConstants.ROWS; i++) {
-            rows.Add(CreateRow());
+            rows.Add(CreateRow(i));
         }
     }
 
-    private List<GamePieceModel> CreateRow(){
+    private List<GamePieceModel> CreateRow(int column){
         List<GamePieceModel> row = new List<GamePieceModel>();
 
         for (int i = 0; i < GameBoardConstants.COLUMNS; i++) {
-            row.Add(new GamePieceModel(new GameObject()));
+            row.Add(new GamePieceModel(column, i));
         }
 
         return row;
