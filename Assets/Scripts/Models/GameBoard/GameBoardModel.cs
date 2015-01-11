@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameBoardModel {
+public class GameBoardModel : IGameBoard {
 
     private List<List<GamePieceModel>> rows;
 
@@ -19,6 +19,15 @@ public class GameBoardModel {
         return GetRows()[row];
     }
 
+    public List<GamePieceModel> GetColumn(int x){
+        List<GamePieceModel> columnCollection = new List<GamePieceModel>();
+        for (int i = 0; i < GameBoardConstants.ROWS; i++) {
+            columnCollection.Add(GetGamePiece(i, x));
+        }
+
+        return columnCollection;
+    }
+
     public void AddGamePiece(GamePieceModel gp, int y, int x){
         rows[y][x] = gp;
     }
@@ -27,11 +36,17 @@ public class GameBoardModel {
         return rows[y][x];
     }
 
-    //public GamePieceModel RemoveGamePiece(int y, int x){
+    public GamePieceModel RemoveGamePiece(int y, int x){
+        GamePieceModel toReturn = rows[y][x];
+        rows[y].RemoveAt(x);
+        return toReturn;
+    }
 
-    //}
-
-
+    public void RemoveList (List<GamePieceModel> toRemove) {
+        for (int i = 0; i < toRemove.Count; i++) {
+            RemoveGamePiece(toRemove[i].y, toRemove[i].x);
+        }
+    }
 
     private void CreateGameBoard() {
         for (int i = 0; i < GameBoardConstants.ROWS; i++) {

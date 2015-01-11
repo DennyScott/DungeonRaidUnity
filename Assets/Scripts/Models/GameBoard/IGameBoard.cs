@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class IGameBoard : MonoBehaviour {
+public interface IGameBoard {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    List<List<GamePieceModel>> GetRows();
+
+    List<GamePieceModel> GetRow(int row);
+
+    List<GamePieceModel> GetColumn(int y);
+
+    void AddGamePiece(GamePieceModel gp, int y, int x);
+
+    GamePieceModel GetGamePiece(int y, int x);
+    
+    GamePieceModel RemoveGamePiece(int y, int x);
+
+    void RemoveList(List<GamePieceModel> toRemove);
+
 }

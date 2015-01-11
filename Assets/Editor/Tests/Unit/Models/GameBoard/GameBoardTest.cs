@@ -27,7 +27,7 @@ public class GameBoardTest {
     }
 
     [Test]
-    public void AddingGamePieceWillPlaceIntoGameBoard() {
+    public void AddingGamePieceWillPlaceIntoGameBoardGettingWillReturn() {
         gameboard.AddGamePiece(gamePiece, 0, 0);
         Assert.AreEqual(gamePiece, gameboard.GetGamePiece(0, 0));
     }
@@ -41,6 +41,36 @@ public class GameBoardTest {
     [Test]
     public void GettingDataFromRowWorksCorrectly() {
         gameboard.AddGamePiece(gamePiece, 0, 0);
-        Assert.AreEqual(gamePiece, gameboard.GetRow(0));
+        Assert.AreEqual(gamePiece, gameboard.GetRow(0)[0]);
     }
+
+    [Test]
+    public void GetColumnReturnsColumnOfData() {
+        gameboard.AddGamePiece(gamePiece, 0, 0);
+        List<GamePieceModel> column = gameboard.GetColumn(0);
+        Assert.AreEqual(gamePiece, column[0]);
+        Assert.AreEqual(GameBoardConstants.ROWS, column.Count);
+    }
+
+    [Test]
+    public void RemoveGamePieceRemovesGamePieceFromList() {
+        gameboard.AddGamePiece(gamePiece, 0, 0);
+        Assert.AreEqual(gamePiece, gameboard.GetGamePiece(0,0));
+        GamePieceModel removedNode = gameboard.RemoveGamePiece(0, 0);
+        Assert.AreEqual(gamePiece, removedNode);
+        Assert.AreNotEqual(gamePiece, gameboard.GetGamePiece(0,0));
+    }
+
+    //[Test]
+    //public void RemoveListOfGamePiecesFromBoard() {
+        //gameboard.AddGamePiece(gamePiece, 0, 0);
+        //GamePieceModel secondPiece = new GamePieceModel(new GameObject());
+        //gameboard.AddGamePiece(gamePiece, 1, 0);
+        //List<GamePieceModel> gpList = new List<GamePieceModel>();
+        //gpList.Add(gamePiece);
+        //gpList.Add(secondPiece);
+        //gameboard.RemoveList(gpList);
+        //Assert.AreNotEqual(gamePiece, gameboard.GetGamePiece(0,0));
+        //Assert.AreNotEqual(secondPiece, gameboard.GetGamePiece(1, 0));
+    //}
 }
