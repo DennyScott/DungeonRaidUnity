@@ -27,9 +27,9 @@ public class GameBoardModel {
         return rows[y][x];
     }
 
-    public GamePieceModel RemoveGamePiece(int y, int x){
+    //public GamePieceModel RemoveGamePiece(int y, int x){
 
-    }
+    //}
 
 
 

@@ -31,4 +31,16 @@ public class GameBoardTest {
         gameboard.AddGamePiece(gamePiece, 0, 0);
         Assert.AreEqual(gamePiece, gameboard.GetGamePiece(0, 0));
     }
+
+    [Test]
+    public void GetRowsReturnsAListOfList(){
+        gameboard.AddGamePiece(gamePiece, 0, 0);
+        Assert.AreEqual(gamePiece, gameboard.GetRows()[0][0]);
+    }
+
+    [Test]
+    public void GettingDataFromRowWorksCorrectly() {
+        gameboard.AddGamePiece(gamePiece, 0, 0);
+        Assert.AreEqual(gamePiece, gameboard.GetRow(0));
+    }
 }
