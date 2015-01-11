@@ -6,10 +6,15 @@ public interface IGameBoardController {
 
     bool CheckForMatch(GamePieceModel from, GamePieceModel to);
 
-    List<GamePieceModel> FillGameBoard();
+    void FillGameBoard();
 
     void ChangeTypeToType(GamePieceModel fromType, GamePieceModel toType);
 
-     void RemoveType(GamePieceModel type);
+    void RemoveType(GamePieceModel type);
 
+	void ClearGameBoard();
+
+	bool IsGameBoardEmpty();
+
+	bool IsGameBoardFull();
 }
