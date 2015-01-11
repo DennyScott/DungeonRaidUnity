@@ -18,6 +18,4 @@ public interface IGameBoard {
 
     void RemoveList(List<GamePieceModel> toRemove);
 
-    void RemoveType(GamePieceModel type);
-
 }

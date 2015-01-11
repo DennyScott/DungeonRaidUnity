@@ -10,4 +10,6 @@ public interface IGameBoardManager {
 
     void ChangeTypeToType(GamePieceModel fromType, GamePieceModel toType);
 
+     void RemoveType(GamePieceModel type);
+
 }
