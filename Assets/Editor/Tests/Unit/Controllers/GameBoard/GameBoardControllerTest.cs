@@ -48,10 +48,34 @@ public class GameBoardControllerTest {
 	}
 
 	[Test]
-	public void CheckFillEmptyFillGameBoardModel() {
-		gameBoardController.Clear();
+	public void CheckFillGameBoard() {
+		gameBoardController.ClearGameBoard();
 		gameBoardController.FillGameBoard();
-		Assert.IsFalse(gameBoardController.isGameboardEmpty());
-		Assert.IsTrue(gameBoardController.isGameboardFull())
+		Assert.IsFalse(gameBoardController.IsGameBoardEmpty());
+		Assert.IsTrue(gameBoardController.IsGameBoardFull());
+	}
+
+	[Test]
+	public void CheckClearGameBoard() {
+		gameBoardController.FillGameBoard();
+		gameBoardController.ClearGameBoard();
+		Assert.IsTrue(gameBoardController.IsGameBoardEmpty());
+		Assert.IsFalse(gameBoardController.IsGameBoardFull());
+	}
+
+	[Test]
+	public void CheckIsGameBoardEmpty() {
+		gameBoardController.ClearGameBoard();
+		Assert.IsTrue(gameBoardController.IsGameBoardEmpty());
+		gameBoardController.FillGameBoard();
+		Assert.IsFalse(gameBoardController.IsGameBoardEmpty());
+	}
+
+	[Test]
+	public void CheckIsGameBoardFull() {
+		gameBoardController.ClearGameBoard();
+		Assert.IsFalse(gameBoardController.IsGameBoardFull());
+		gameBoardController.FillGameBoard();
+		Assert.IsTrue(gameBoardController.IsGameBoardFull());
 	}
 }

@@ -3,26 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GameBoardController : IGameBoardController {
-	GameBoardModel gameBoardModel;
+	GameBoardModel _gameBoardModel;
+
+	GameBoardModel gameBoardModel {
+		get {
+			return _gameBoardModel;
+		}
+	}
 
 	public GameBoardController() {
-		gameBoardModel = new GameBoardModel();
+		_gameBoardModel = new GameBoardModel();
 	}
 
 	public bool CheckForMatch(GamePieceModel from, GamePieceModel to) {
 		return false;
 	}
-	
-	public void FillGameBoard() {
 
-	}
-	
 	public void ChangeTypeToType(GamePieceModel fromType, GamePieceModel toType) {
 		
 	}
 	
 	public void RemoveType(GamePieceModel type) {
 		
+	}
+	
+	public void FillGameBoard() {
+
 	}
 
 	public void ClearGameBoard() {
