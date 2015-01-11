@@ -11,8 +11,8 @@ public class GameBoardController : IGameBoardController {
 		}
 	}
 
-	public GameBoardController() {
-		_gameBoardModel = new GameBoardModel();
+	public GameBoardController(int rows, int columns) {
+		_gameBoardModel = new GameBoardModel(rows, columns);
 	}
 
 	public bool CheckForMatch(GamePieceModel from, GamePieceModel to) {

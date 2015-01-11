@@ -21,7 +21,7 @@ public class GameBoardTest {
 
     [Test]
     public void CorrectAmountOfRowsCreated() {
-        Assert.AreEqual(maxRows, gameboard.GetRows().Count);
+        Assert.AreEqual(maxRows, gameboard.GetBoard().Count);
     }
 
     [Test]
@@ -38,7 +38,7 @@ public class GameBoardTest {
     [Test]
     public void GetRowsReturnsAListOfList(){
         gameboard.AddGamePiece(gamePiece, 0, 0);
-        Assert.AreEqual(gamePiece, gameboard.GetRows()[0][0]);
+        Assert.AreEqual(gamePiece, gameboard.GetBoard()[0][0]);
     }
 
     [Test]
@@ -84,8 +84,8 @@ public class GameBoardTest {
         Assert.IsFalse(gameboard.IsFull());
     }
 
-    [Test]
-    public void ReturnRowWillReturnARowsDataAndRemoveIt(){
-        gamePieceModel
-    }
+    //[Test]
+    //public void ReturnRowWillReturnARowsDataAndRemoveIt(){
+        //gamePieceModel
+    //}
 }

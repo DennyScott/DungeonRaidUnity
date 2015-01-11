@@ -6,6 +6,15 @@ public class GameBoardSlot {
     private GamePieceModel _gamePiece;
     private bool isEmpty = true;
 
+    public GameBoardSlot() {
+
+    }
+
+    public GameBoardSlot(GamePieceModel gamePiece) {
+        _gamePiece = gamePiece;
+        isEmpty = false;
+    }
+
     public GamePieceModel gamePiece {
         get { return _gamePiece; }
     }
@@ -21,7 +30,7 @@ public class GameBoardSlot {
 
     public GamePieceModel RemoveGamePiece(){
         if(isEmpty){
-            return ;
+            return null;
         }
         GamePieceModel gp = gamePiece;
         _gamePiece = null;

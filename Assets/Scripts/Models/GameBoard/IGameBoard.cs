@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public interface IGameBoard {
 
-    List<List<GamePieceModel>> GetRows();
+    List<List<GamePieceModel>> GetBoard();
 
     List<GamePieceModel> GetRow(int row);
 
