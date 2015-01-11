@@ -9,21 +9,24 @@ public class GameBoardTest {
 
     GameBoardModel gameboard;
     GamePieceModel gamePiece;
+    int maxRows, maxColumns;
 
     [SetUp]
     public void Init() {
-        gameboard = new GameBoardModel();
+        maxRows = 10;
+        maxColumns = 5;
+        gameboard = new GameBoardModel(maxRows, maxColumns);
         gamePiece = new GamePieceModel();
     }
 
     [Test]
     public void CorrectAmountOfRowsCreated() {
-        Assert.AreEqual(GameBoardConstants.ROWS, gameboard.GetRows().Count);
+        Assert.AreEqual(maxRows, gameboard.GetRows().Count);
     }
 
     [Test]
     public void CorrectAmountOfColumnsCreated() {
-        Assert.AreEqual(GameBoardConstants.COLUMNS, gameboard.GetRow(0).Count);
+        Assert.AreEqual(maxColumns, gameboard.GetRow(0).Count);
     }
 
     [Test]
@@ -49,7 +52,7 @@ public class GameBoardTest {
         gameboard.AddGamePiece(gamePiece, 0, 0);
         List<GamePieceModel> column = gameboard.GetColumn(0);
         Assert.AreEqual(gamePiece, column[0]);
-        Assert.AreEqual(GameBoardConstants.ROWS, column.Count);
+        Assert.AreEqual(maxRows, column.Count);
     }
 
     [Test]
@@ -61,16 +64,28 @@ public class GameBoardTest {
         Assert.AreNotEqual(gamePiece, gameboard.GetGamePiece(0,0));
     }
 
-    //[Test]
-    //public void RemoveListOfGamePiecesFromBoard() {
-        //gameboard.AddGamePiece(gamePiece, 0, 0);
-        //GamePieceModel secondPiece = new GamePieceModel(new GameObject());
-        //gameboard.AddGamePiece(gamePiece, 1, 0);
-        //List<GamePieceModel> gpList = new List<GamePieceModel>();
-        //gpList.Add(gamePiece);
-        //gpList.Add(secondPiece);
-        //gameboard.RemoveList(gpList);
-        //Assert.AreNotEqual(gamePiece, gameboard.GetGamePiece(0,0));
-        //Assert.AreNotEqual(secondPiece, gameboard.GetGamePiece(1, 0));
-    //}
+    [Test]
+    public void RemoveListOfGamePiecesFromBoard() {
+        gameboard.AddGamePiece(gamePiece, 0, 0);
+        GamePieceModel secondPiece = new GamePieceModel();
+        gameboard.AddGamePiece(gamePiece, 1, 0);
+        List<GamePieceModel> gpList = new List<GamePieceModel>();
+        gpList.Add(gamePiece);
+        gpList.Add(secondPiece);
+        gameboard.RemoveList(gpList);
+        Assert.AreNotEqual(gamePiece, gameboard.GetGamePiece(0,0));
+        Assert.AreNotEqual(secondPiece, gameboard.GetGamePiece(1, 0));
+    }
+
+    [Test]
+    public void IsFullTrueWhenFullFalseOtherwise() {
+        Assert.IsTrue(gameboard.IsFull());
+        gameboard.RemoveGamePiece(0,0);
+        Assert.IsFalse(gameboard.IsFull());
+    }
+
+    [Test]
+    public void ReturnRowWillReturnARowsDataAndRemoveIt(){
+        gamePieceModel
+    }
 }
