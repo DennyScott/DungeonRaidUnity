@@ -4,43 +4,67 @@ using System.Collections.Generic;
 
 public class GameBoardModel : IGameBoard {
 
-    private List<List<GamePieceModel>> rows;
+    private List<List<GameBoardSlot>> board;
+    private int maxRows, maxColumns; 
 
-    public GameBoardModel() {
-        rows = new List<List<GamePieceModel>>();
+    public GameBoardModel(int maxRows, int maxColumns) {
+        this.maxRows = maxRows;
+        this.maxColumns = maxColumns;
+        board = new List<List<GameBoardSlot>>();
         CreateGameBoard();
     }
 
-    public List<List<GamePieceModel>> GetRows() {
-        return rows;
+    public List<List<GamePieceModel>> GetBoard() {
+        var returnBoard = new List<List<GamePieceModel>>();
+        for (int i = 0; i < board.Count; i++) {
+            returnBoard.Add(GetRow(i));
+        }
+        return returnBoard;
     }
 
     public List<GamePieceModel> GetRow(int row){
-        return GetRows()[row];
+        var returnBoard = new List<GamePieceModel>();
+        for (int i = 0; i < board[row].Count; i++) {
+            returnBoard.Add(board[row][i].gamePiece); 
+        }
+        return returnBoard;        
     }
 
     public List<GamePieceModel> GetColumn(int x){
-        List<GamePieceModel> columnCollection = new List<GamePieceModel>();
-        for (int i = 0; i < GameBoardConstants.ROWS; i++) {
+        var columnCollection = new List<GamePieceModel>();
+        for (int i = 0; i < board.Count; i++) {
             columnCollection.Add(GetGamePiece(i, x));
         }
 
         return columnCollection;
     }
 
-    public void AddGamePiece(GamePieceModel gp, int y, int x){
-        gp.x = x;
-        gp.y = y;
-        rows[y][x] = gp;
+    public void AddGamePiece(GamePieceModel gp, int row, int column){
+        board[row][column].AddGamePiece(gp);  
     }
 
-    public GamePieceModel GetGamePiece(int y, int x){
-        return rows[y][x];
+    public GamePieceModel GetGamePiece(int row, int column){
+        return board[row][column].gamePiece;
     }
 
-    public GamePieceModel RemoveGamePiece(int y, int x){
-        GamePieceModel toReturn = rows[y][x];
-        rows[y].RemoveAt(x);
+    public GamePieceModel RemoveGamePiece(int row, int column){
+        return board[row][column].RemoveGamePiece();
+    }
+
+    public List<GamePieceModel> RemoveRow(int row) {
+        List<GamePieceModel> toReturn = new List<GamePieceModel>();
+        for (int i = 0; i < board[row].Count; i++){
+            toReturn.Add(board[row][i].RemoveGamePiece());
+        }
+
+        return toReturn;
+    }
+
+    public List<GamePieceModel> RemoveColumn(int column){
+        var toReturn = new List<GamePieceModel>();
+        for (int i = 0; i < board.Count; i++) {
+            toReturn.Add(board[i][column].RemoveGamePiece());
+        }
         return toReturn;
     }
 
@@ -50,17 +74,42 @@ public class GameBoardModel : IGameBoard {
         }
     }
 
+    public bool IsFull (){
+        for (int i = 0; i < maxRows; i++){
+            for (int j = 0; j < maxColumns; j++) {
+                if(board[i][j].IsEmpty()){
+                    return false;
+                }
+            }          
+        }
+
+        return true;
+    }
+
+    public bool IsEmpty() {
+        for (int i = 0; i < maxRows; i++){
+            for (int j = 0; j < maxColumns; j++) {
+                if(!board[i][j].IsEmpty()){
+                    return false;
+                }
+            }          
+        }
+
+        return true;
+    }
+
     private void CreateGameBoard() {
-        for (int i = 0; i < GameBoardConstants.ROWS; i++) {
-            rows.Add(CreateRow(i));
+        for (int i = 0; i < maxRows; i++) {
+            board.Add(CreateRow(i));
         }
     }
 
-    private List<GamePieceModel> CreateRow(int column){
-        List<GamePieceModel> row = new List<GamePieceModel>();
+    private List<GameBoardSlot> CreateRow(int column){
+        var row = new List<GameBoardSlot>();
 
-        for (int i = 0; i < GameBoardConstants.COLUMNS; i++) {
-            row.Add(new GamePieceModel(column, i));
+        for (int i = 0; i < maxColumns; i++) {
+            row.Add(new GameBoardSlot(new GamePieceModel(column, i)));
+
         }
 
         return row;

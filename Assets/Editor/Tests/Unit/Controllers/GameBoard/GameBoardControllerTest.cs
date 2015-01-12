@@ -20,7 +20,7 @@ public class GameBoardControllerTest {
 	
 	[SetUp]
 	public void Init() {
-		gameBoardController = new GameBoardController();
+		gameBoardController = new GameBoardController(10, 5);
 		firePieceOne = new FireModel();
 		firePieceTwo = new FireModel();
 		waterPieceOne = new WaterModel();
