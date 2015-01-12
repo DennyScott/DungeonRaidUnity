@@ -16,6 +16,9 @@ public class GameBoardController : IGameBoardController {
 	}
 
 	public bool CheckForMatch(GamePieceModel from, GamePieceModel to) {
+		if(from.GetType() == to.GetType()){
+			return true;
+		}
 		return false;
 	}
 

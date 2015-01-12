@@ -78,4 +78,9 @@ public class GameBoardControllerTest {
 		gameBoardController.FillGameBoard();
 		Assert.IsTrue(gameBoardController.IsGameBoardFull());
 	}
+
+	[Test]
+	public void CheckChangeTypeToType() {
+
+	}
 }
