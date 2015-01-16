@@ -16,7 +16,7 @@ public class GameBoardTest {
         maxRows = 10;
         maxColumns = 5;
         gameboard = new GameBoardModel(maxRows, maxColumns);
-        gamePiece = new GamePieceModel();
+        gamePiece = new FireModel(1, 1);
     }
 
     [Test]
@@ -67,7 +67,7 @@ public class GameBoardTest {
     [Test]
     public void RemoveListOfGamePiecesFromBoard() {
         gameboard.AddGamePiece(gamePiece, 0, 0);
-        GamePieceModel secondPiece = new GamePieceModel();
+        GamePieceModel secondPiece = new FireModel(1, 1);
         gameboard.AddGamePiece(gamePiece, 1, 0);
         List<GamePieceModel> gpList = new List<GamePieceModel>();
         gpList.Add(gamePiece);

@@ -11,7 +11,7 @@ public class GameBoardSlotTest {
 
     [SetUp]
     public void Init() {
-        gamePiece = new GamePieceModel();
+        gamePiece = new FireModel(0, 0);
         gameboardSlot = new GameBoardSlot(gamePiece);
     }
 
@@ -33,7 +33,7 @@ public class GameBoardSlotTest {
 
     [Test]
     public void AddGamePieceAddsNewGamePiece(){
-        GamePieceModel secondPiece = new GamePieceModel();
+        GamePieceModel secondPiece = new FireModel(0, 0);
         gameboardSlot.AddGamePiece(secondPiece);
         Assert.AreEqual(secondPiece, gameboardSlot.gamePiece);
     }

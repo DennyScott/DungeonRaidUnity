@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GamePieceModel {
+public abstract class GamePieceModel {
 
     private int _x, _y;
 
@@ -23,4 +23,6 @@ public class GamePieceModel {
     public GamePieceModel() {
         
     }
+
+	public abstract override string ToString();
 }
