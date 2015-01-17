@@ -7,8 +7,6 @@ public class GameBoardModel : IGameBoard {
     private List<GameBoardRow> board;
     private int maxRows, maxColumns; 
 
-//	public GamePieceModel[] gamePeiceTypes = [];
-
     public GameBoardModel(int maxRows, int maxColumns) {
         this.maxRows = maxRows;
         this.maxColumns = maxColumns;
@@ -69,9 +67,10 @@ public class GameBoardModel : IGameBoard {
 	public int Count {
 		get {
 			int count = 0;
-			foreach(List<GamePieceModel> row in board) {
+			foreach(GameBoardRow row in board) {
 				count += row.Count;
 			}
+			return count;
 		}
 	}
 
