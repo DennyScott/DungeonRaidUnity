@@ -2,17 +2,14 @@
 using System.Collections;
 
 public class GamePieceManager : MonoBehaviour {
-	public GameObject gamePiece;
 
-	private Transform gamePieceTransform;
-
-	void Awake() {
-		gamePieceTransform = gamePiece.transform;
+	// Use this for initialization
+	void Start () {
+	
 	}
-
-	public void CreateGamePeice(float x, float y) {
-		Vector3 pos = new Vector3(x, y, gamePieceTransform.position.z);
-		Instantiate(gamePiece, pos, gamePieceTransform.rotation);
+	
+	// Update is called once per frame
+	void Update () {
+	
 	}
-
 }
