@@ -15,6 +15,6 @@ public class WorldManager : MonoBehaviour {
 	void Start () {
 		generators.GetGenerators();
 		managers.GetManagers();
-		Generators.GamePieceGenerator.CreateElement();
+		Generators.GamePieceGenerator.CreateElements();
 	}
 }
