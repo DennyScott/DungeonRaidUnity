@@ -44,7 +44,7 @@ public class GamePieceGenerator : MonoBehaviour {
 			newPiece = CreateElement(earthElement, startX, startY);
 		}
 
-		Managers.gamePieceManager.MovePiece(newPiece, endX, endY);
+		Managers.gamePieceManager.MovePiece(newPiece, x, y, endX, endY);
 
 	}
 

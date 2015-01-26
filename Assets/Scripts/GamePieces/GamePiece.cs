@@ -5,19 +5,13 @@ public class GamePiece : MonoBehaviour {
 	private bool isLerping = false;
 	private Vector3 startPosition;
 	private Vector3 endPosition;
-	public float speed = 1.0F;
 	private float startTime;
 	private float journeyLength;
+
+	public int row;
+	public int column;
+	public float speed = 1.0F;
 	public float smooth = 5.0F;
-	
-	// Use this for initialization
-	void Start () {
-	
-	}
-
-	void Update() {
-
-	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -31,6 +25,11 @@ public class GamePiece : MonoBehaviour {
 			}
 		}
 	}
+
+	public void SetPosition(int row, int column) {
+		this.row = row;
+		this.column = column;
+	}
 	
 	public void StartLerp(Vector3 endPosition) {
 		isLerping = true;
@@ -42,7 +41,7 @@ public class GamePiece : MonoBehaviour {
 
 	void OnMouseDown() {
 		if(!isLerping) {
-			Debug.Log ("Click!");
+			Managers.levelManager.AddPiece(gameObject);
 		}
 	}
 }

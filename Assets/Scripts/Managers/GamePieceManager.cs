@@ -3,7 +3,9 @@ using System.Collections;
 
 public class GamePieceManager : MonoBehaviour {
 
-	public void MovePiece(GameObject piece, float x, float y) {
-		((GamePiece)(piece.GetComponent(typeof (GamePiece)))).StartLerp(new Vector3 (x, y, 0.0f));
+	public void MovePiece(GameObject piece, int x, int y, float positionX, float positionY) {
+		GamePiece gamePiece = piece.GetComponent(typeof (GamePiece)) as GamePiece;
+		gamePiece.SetPosition(x, y);
+		gamePiece.StartLerp(new Vector3 (positionX, positionY, 0.0f));
 	}
 }
