@@ -14,6 +14,10 @@ public class GamePiece : MonoBehaviour {
 	void Start () {
 	
 	}
+
+	void Update() {
+
+	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -34,5 +38,11 @@ public class GamePiece : MonoBehaviour {
 		this.endPosition = endPosition;
 		startTime = Time.time;
 		journeyLength = Vector3.Distance(startPosition, this.endPosition);
+	}
+
+	void OnMouseDown() {
+		if(!isLerping) {
+			Debug.Log ("Click!");
+		}
 	}
 }
