@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LevelManager : MonoBehaviour {
+public class SelectionManager : MonoBehaviour {
 	private PlayerManager playerManager;
 	private GamePieceManager gamePieceManager;
 	

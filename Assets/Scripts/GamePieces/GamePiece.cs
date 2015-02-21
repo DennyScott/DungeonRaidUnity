@@ -41,7 +41,7 @@ public class GamePiece : MonoBehaviour {
 
 	void OnMouseDown() {
 		if(!isLerping) {
-			Managers.levelManager.AddPiece(gameObject);
+			Managers.selectionManager.AddPiece(gameObject);
 		}
 	}
 }

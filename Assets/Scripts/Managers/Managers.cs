@@ -6,12 +6,12 @@ public class Managers : MonoBehaviour {
 	public static GamePieceManager gamePieceManager;
 	public static GameBoardManager gameBoardManager;
 	public static PlayerManager playerManager;
-	public static LevelManager levelManager;
+	public static SelectionManager selectionManager;
 
 	public void GetManagers() {
 		gamePieceManager = GetComponentInChildren(typeof (GamePieceManager)) as GamePieceManager;
 		gameBoardManager = GetComponentInChildren(typeof (GameBoardManager)) as GameBoardManager;
 		playerManager = GetComponentInChildren(typeof (PlayerManager)) as PlayerManager;
-		levelManager = GetComponentInChildren(typeof (LevelManager)) as LevelManager;
+		selectionManager = GetComponentInChildren(typeof (SelectionManager)) as SelectionManager;
 	}
 }
