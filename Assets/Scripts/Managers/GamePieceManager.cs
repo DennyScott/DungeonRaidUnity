@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GamePieceManager : MonoBehaviour {
+
+	//Delegates
 	public delegate void GamePieceEvent(GameObject g);
 	public delegate void MovementEvent();
 
+	//Events
 	public event GamePieceEvent OnClickDown;
 	public event GamePieceEvent OnClickUp;
 	public event GamePieceEvent OnMouseEnterPiece;
@@ -15,17 +18,8 @@ public class GamePieceManager : MonoBehaviour {
 	public event MovementEvent OnPiecesMoving;
 	public event MovementEvent OnPiecesStopped;
 
+	//List of object currently moving
 	private List<GameObject> movingObjects = new List<GameObject>();
-
-
-	void Start() {
-		RegisterManagers();
-
-	}
-
-	void RegisterManagers() {
-
-	}
 
 	public void RegisterPiece(GameObject piece) {
 		GamePiece gamePiece = piece.GetComponent(typeof (GamePiece)) as GamePiece;
@@ -36,6 +30,7 @@ public class GamePieceManager : MonoBehaviour {
 		gamePiece.OnStopLerp += HandleOnStopLerp;
 	}
 
+	//Event Handlers
 	void HandleOnStopLerp (GameObject g) {
 		movingObjects.Remove(g);
 		if(movingObjects.Count == 0 && OnPiecesStopped != null) {
@@ -53,8 +48,7 @@ public class GamePieceManager : MonoBehaviour {
 			OnPiecesMoving();
 		}
 	}
-
-	//Event Handlers
+	
 	void HandleOnMouseEnterPiece (GameObject g){
 		if(OnMouseEnterPiece != null) {
 			OnMouseEnterPiece(g);
@@ -72,7 +66,9 @@ public class GamePieceManager : MonoBehaviour {
 			OnClickUp(g);
 		}	
 	}
+	//End of Event Handlers
 
+	//Used for setting up moving pieces
 	public void MovePiece(GameObject piece, int x, int y, float positionX, float positionY) {
 		GamePiece gamePiece = piece.GetComponent(typeof (GamePiece)) as GamePiece;
 		gamePiece.SetPosition(x, y);

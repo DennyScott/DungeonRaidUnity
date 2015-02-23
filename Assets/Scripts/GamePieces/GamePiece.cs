@@ -15,7 +15,7 @@ public class GamePiece : MonoBehaviour {
 	public float speed = 1.0F;
 	public float smooth = 5.0F;
 
-	//Delegtes
+	//Delegates
 	public delegate void GamePieceEvent(GameObject g);
 
 	//Events
@@ -40,6 +40,7 @@ public class GamePiece : MonoBehaviour {
 		}
 	}
 
+	//Movement Controls
 	public void SetPosition(int row, int column) {
 		this.row = row;
 		this.column = column;
@@ -62,7 +63,9 @@ public class GamePiece : MonoBehaviour {
 			OnStartLerp(gameObject);
 		}
 	}
+	//End of Movement Controls
 
+	//Unity Event Handling
 	void OnMouseDown() {
 		if(OnClickDown != null) {
 			OnClickDown(gameObject);

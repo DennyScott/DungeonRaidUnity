@@ -3,16 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class SelectionManager : MonoBehaviour {
+	//Private Variables
 	private PlayerManager playerManager;
 	private GamePieceManager gamePieceManager;
 	private List<GameObject> selectedPieces = new List<GameObject>();
 
+	//States
 	public enum SelectionState {IDLE, DRAGGING_PIECES};
 	public  SelectionState selectionState { get; private set; }
 
+	//Delegates
 	public delegate void ActionEvent();
 	public delegate void StateChangeEvent();
 
+	//Events
 	public event ActionEvent OnDropPieces;
 	public event ActionEvent OnAddPiece;
 	public event ActionEvent OnRemovePiece;
