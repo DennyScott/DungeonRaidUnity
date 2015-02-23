@@ -12,6 +12,8 @@ public class GamePieceGenerator : MonoBehaviour {
 	public float offset = 0.5f;
 	public List<GameObject> positions;
 
+	private GamePieceManager gamePieceManager;
+
 	private Level level;
 
 	public void Awake() {
@@ -28,6 +30,7 @@ public class GamePieceGenerator : MonoBehaviour {
 	}
 
 	public void CreatePiece(int x, int y) {
+		CheckManagers();
 		float startX = (float) x - 4 + offset;
 		float startY = 5.0f;
 		float endX = startX;
@@ -44,8 +47,15 @@ public class GamePieceGenerator : MonoBehaviour {
 			newPiece = CreateElement(earthElement, startX, startY);
 		}
 
-		Managers.gamePieceManager.MovePiece(newPiece, x, y, endX, endY);
+		gamePieceManager.RegisterPiece(newPiece);
+		gamePieceManager.MovePiece(newPiece, x, y, endX, endY);
 
+	}
+
+	void CheckManagers() {
+		if(gamePieceManager == null) {
+			gamePieceManager = Managers.gamePieceManager;
+		}
 	}
 
 }

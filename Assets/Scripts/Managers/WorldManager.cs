@@ -9,12 +9,13 @@ public class WorldManager : MonoBehaviour {
 	void Awake () {
 		generators = GetComponent(typeof (Generators)) as Generators;
 		managers = GetComponent(typeof (Managers)) as Managers;
+		generators.GetGenerators();
+		managers.GetManagers();
+		Managers.gameBoardManager.CreateBoard();
 	}
 
 	// Use this for initialization
 	void Start () {
-		generators.GetGenerators();
-		managers.GetManagers();
-		Managers.gameBoardManager.CreateBoard();
+
 	}
 }
