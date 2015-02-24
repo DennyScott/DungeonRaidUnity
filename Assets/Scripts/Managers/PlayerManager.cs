@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class PlayerManager : MonoBehaviour {
 
 	#region States
-	public enum PlayerState {IDLE, ACTIONING, WAITING};
+	public enum PlayerState {WAITING, IDLE, ACTIONING};
 	public  PlayerState playerState { get; private set; }
 
 	#endregion
@@ -24,7 +24,6 @@ public class PlayerManager : MonoBehaviour {
 
 	#region Standard Methods
 	void Start() {
-		playerState = PlayerState.WAITING;
 		RegisterEvents();
 	}
 

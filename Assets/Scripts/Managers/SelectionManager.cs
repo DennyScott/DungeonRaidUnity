@@ -6,7 +6,6 @@ public class SelectionManager : MonoBehaviour {
 
 	#region Private Variables
 	private PlayerManager playerManager;
-	private GamePieceManager gamePieceManager;
 	private List<GameObject> selectedPieces = new List<GameObject>();
 
 	#endregion
@@ -54,13 +53,13 @@ public class SelectionManager : MonoBehaviour {
 	/// </summary>
 	void GetManagers() {
 		playerManager = Managers.playerManager;
-		gamePieceManager = Managers.gamePieceManager;
 	}
 
 	/// <summary>
 	/// Registers the piece events to thier event handlers.
 	/// </summary>
 	void RegisterPieceEvents() {
+		GamePieceManager gamePieceManager = Managers.gamePieceManager;
 		gamePieceManager.OnClickDown += HandleClickDown;
 		gamePieceManager.OnMouseEnterPiece += HandleOnMouseEnterPiece;
 	}
@@ -116,7 +115,6 @@ public class SelectionManager : MonoBehaviour {
 	/// <param name="piece">The game piece to add to the selection list</param>
 	void AddPiece(GameObject piece) {
 		if(IsAcceptablePiece(piece)) {
-			Debug.Log ("Adding Piece!");
 			selectedPieces.Add(piece);
 			if(OnAddPiece != null) {
 				OnAddPiece();
@@ -130,7 +128,6 @@ public class SelectionManager : MonoBehaviour {
 	/// </summary>
 	/// <param name="piece">the game piece to remove from the selected list</param>
 	void RemovePiece(GameObject piece) {
-		Debug.Log ("Removing Piece");
 		selectedPieces.RemoveAt(selectedPieces.Count - 1);
 		if(OnRemovePiece != null) {
 			OnRemovePiece();
@@ -141,14 +138,13 @@ public class SelectionManager : MonoBehaviour {
 	/// Submits the selected pieces in the selection list to be destroyed.
 	/// </summary>
 	void SubmitSelectedPieces() {
-		Debug.Log ("Submit!!");
-		Debug.Log (selectedPieces.Count);
+		//Need to add Submission Code
 		selectedPieces.Clear();
 	}
 
 	#endregion
 
-	#region Selection List Flags
+	#region Selection List Helper Methods
 
 	/// <summary>
 	/// Determines whether this instance is the previous piece of the selection list.
@@ -211,6 +207,7 @@ public class SelectionManager : MonoBehaviour {
 	/// <returns><c>true</c> if this instance is the correct type for the selection lit; otherwise, <c>false</c>.</returns>
 	/// <param name="piece">The game piece to check.</param>
 	public bool IsCorrectType(GameObject piece) {
+		//Needs to check for matching type
 		return true;
 	}
 
