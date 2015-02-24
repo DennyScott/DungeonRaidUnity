@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GamePieceGenerator : MonoBehaviour {
+
+	#region Public Varables
 	public  GameObject airElement;
 	public  GameObject fireElement;
 	public  GameObject earthElement;
@@ -12,14 +14,42 @@ public class GamePieceGenerator : MonoBehaviour {
 	public float offset = 0.5f;
 	public List<GameObject> positions;
 
-	private GamePieceManager gamePieceManager;
+	#endregion
 
+	#region Private Variables
+	private GamePieceManager gamePieceManager;
 	private Level level;
 
+	#endregion
+
+	#region Standard Methods
 	public void Awake() {
 		level = GameObject.FindGameObjectWithTag("Level").GetComponent(typeof (Level)) as Level;
 	}
 
+	#endregion
+
+	#region Event and Manager Registration
+	/// <summary>
+	/// Checks to see if the managers have been initalized, if not, it will initalize them
+	/// </summary>
+	void CheckManagers() {
+		if(gamePieceManager == null) {
+			gamePieceManager = Managers.gamePieceManager;
+		}
+	}
+	
+	#endregion
+
+	#region Create GamePiece
+
+	/// <summary>
+	/// Creates a new element game piece.
+	/// </summary>
+	/// <returns>The new gameObject of the element.</returns>
+	/// <param name="element">The gameObject to Create</param>
+	/// <param name="x">The x coordinate.</param>
+	/// <param name="y">The y coordinate.</param>
 	private GameObject CreateElement(GameObject element, float x, float y) {
 		GameObject newPiece = Instantiate(gamePiece) as GameObject;
 		GameObject newGraphic = Instantiate(element) as GameObject;
@@ -29,6 +59,11 @@ public class GamePieceGenerator : MonoBehaviour {
 		return newPiece;
 	}
 
+	/// <summary>
+	/// Creates the a game piece at the given x y coordinate
+	/// </summary>
+	/// <param name="x">The x coordinate.</param>
+	/// <param name="y">The y coordinate.</param>
 	public void CreatePiece(int x, int y) {
 		CheckManagers();
 		float startX = (float) x - 4 + offset;
@@ -52,10 +87,6 @@ public class GamePieceGenerator : MonoBehaviour {
 
 	}
 
-	void CheckManagers() {
-		if(gamePieceManager == null) {
-			gamePieceManager = Managers.gamePieceManager;
-		}
-	}
+	#endregion
 
 }
