@@ -3,9 +3,13 @@ using System.Collections;
 
 public class WorldManager : MonoBehaviour {
 
+	#region Private Variables
 	private Generators generators;
 	private Managers managers;
 
+	#endregion
+
+	#region Standard Methods
 	void Awake () {
 		generators = GetComponent(typeof (Generators)) as Generators;
 		managers = GetComponent(typeof (Managers)) as Managers;
@@ -14,8 +18,5 @@ public class WorldManager : MonoBehaviour {
 		Managers.gameBoardManager.CreateBoard();
 	}
 
-	// Use this for initialization
-	void Start () {
-
-	}
+	#endregion
 }

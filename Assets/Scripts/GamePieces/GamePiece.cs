@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GamePiece : MonoBehaviour {
-
+	
 	#region Private Variables
 	private bool isLerping = false;
 	private Vector3 startPosition;
@@ -49,6 +49,7 @@ public class GamePiece : MonoBehaviour {
 	#endregion
 
 	#region Movement Controls
+
 	/// <summary>
 	/// Sets the position of the piece in terms of column and row
 	/// </summary>
