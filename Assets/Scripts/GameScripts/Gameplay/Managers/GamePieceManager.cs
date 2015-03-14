@@ -23,6 +23,7 @@ public class GamePieceManager : MonoBehaviour {
 	public event GamePieceEvent OnMouseExitPiece;
 	public event GamePieceEvent OnStartLerp;
 	public event GamePieceEvent OnStopLerp;
+	public event GamePieceEvent OnRemovePiece;
 	public event MovementEvent OnPiecesMoving;
 	public event MovementEvent OnPiecesStopped;
 
@@ -40,11 +41,28 @@ public class GamePieceManager : MonoBehaviour {
 		gamePiece.OnMouseEnterPiece += HandleOnMouseEnterPiece;
 		gamePiece.OnStartLerp += HandleOnStartLerp;
 		gamePiece.OnStopLerp += HandleOnStopLerp;
+		gamePiece.OnRemovePiece += HandleOnRemovePiece;
+	}
+
+	public void UnRegisterPiece(GameObject piece) {
+		GamePiece gamePiece = piece.GetComponent(typeof (GamePiece)) as GamePiece;
+		gamePiece.OnClickDown -= HandleOnClickDown;
+		gamePiece.OnClickUp -= HandleOnClickUp;
+		gamePiece.OnMouseEnterPiece -= HandleOnMouseEnterPiece;
+		gamePiece.OnStartLerp -= HandleOnStartLerp;
+		gamePiece.OnStopLerp -= HandleOnStopLerp;
+		gamePiece.OnRemovePiece -= HandleOnRemovePiece;
 	}
 
 	#endregion
 
 	#region Event Handlers
+	void HandleOnRemovePiece (GameObject g) {
+		UnRegisterPiece(g);
+		if(OnRemovePiece != null)
+			OnRemovePiece(g);
+	}
+
 	/// <summary>
 	/// Handles the on stop lerp event.
 	/// </summary>

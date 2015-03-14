@@ -32,6 +32,7 @@ public class GamePiece : MonoBehaviour {
 	public event GamePieceEvent OnMouseExitPiece;
 	public event GamePieceEvent OnStartLerp;
 	public event GamePieceEvent OnStopLerp;
+	public event GamePieceEvent OnRemovePiece;
 	#endregion
 	
 	#region Standard Methods
@@ -84,6 +85,14 @@ public class GamePiece : MonoBehaviour {
 			OnStartLerp(gameObject);
 		}
 	}
+
+	/// <summary>
+	/// 	Used to remove a piece from the gameboard
+	/// </summary>
+	public void RemovePiece() {
+		TriggerOnRemovePiece();
+		Destroy(gameObject);
+	}
 	#endregion
 
 	#region Event Handling
@@ -121,6 +130,15 @@ public class GamePiece : MonoBehaviour {
 	void OnMouseExit() {
 		if(OnMouseExitPiece != null) {
 			OnMouseExitPiece(gameObject);
+		}
+	}
+
+	/// <summary>
+	/// 	Removes the gameObject from the board, and calls all listening handlers
+	/// </summary>
+	void TriggerOnRemovePiece() {
+		if(OnRemovePiece != null) {
+			OnRemovePiece(gameObject);
 		}
 	}
 	#endregion
