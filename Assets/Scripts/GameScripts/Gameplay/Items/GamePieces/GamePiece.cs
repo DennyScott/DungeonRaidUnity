@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class GamePiece : Mediator {
 	
 	#region Private Variables
-	private bool isLerping = false;
+	private bool isLerping;
 	private Vector3 startPosition;
 	private Vector3 endPosition;
 	private float startTime;
@@ -13,10 +12,10 @@ public class GamePiece : Mediator {
 	#endregion
 
 	#region Public Variables
-	public int row;
-	public int column;
-	public float speed = 1.0F;
-	public float smooth = 5.0F;
+	private int _row;
+	private int _column;
+	public float _speed = 1.0F;
+	public float _smooth = 5.0F;
 
 	#endregion
 
@@ -38,7 +37,7 @@ public class GamePiece : Mediator {
 	#region Standard Methods
 	void FixedUpdate () {
 		if (isLerping) {
-			float distCovered = (Time.time - startTime) * speed;
+			float distCovered = (Time.time - startTime) * _speed;
 			float fracJourney = distCovered / journeyLength;
 			transform.position = Vector3.Lerp(startPosition, endPosition, fracJourney);
 
@@ -57,8 +56,8 @@ public class GamePiece : Mediator {
 	/// <param name="row">The game pieces row.</param>
 	/// <param name="column">The game pieces column.</param>
 	public void SetPosition(int row, int column) {
-		this.row = row;
-		this.column = column;
+		_row = row;
+		_column = column;
 	}
 
 	/// <summary>
@@ -142,4 +141,8 @@ public class GamePiece : Mediator {
 		}
 	}
 	#endregion
+
+	public int Row {get; set;}
+
+	public int Column{get; set;}
 }

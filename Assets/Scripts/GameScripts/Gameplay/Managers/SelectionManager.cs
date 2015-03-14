@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class SelectionManager : Manager {
@@ -16,19 +15,20 @@ public class SelectionManager : Manager {
 	#endregion
 
 	#region States
-	public enum SelectionState {IDLE, DRAGGING_PIECES};
-	public  SelectionState selectionState { get; private set; }
+	public enum SelectionStates {IDLE, DRAGGING_PIECES};
+	public SelectionStates SelectionState { get; private set; }
 
 	#endregion
 
 	#region Delegates
-	public delegate void ActionEvent();
+	public delegate void ActionEvent(GameObject g);
+	public delegate void TriggerEvent();
 	public delegate void StateChangeEvent();
 
 	#endregion
 
 	#region Events
-	public event ActionEvent OnDropPieces;
+	public event TriggerEvent OnDropPieces;
 	public event ActionEvent OnAddPiece;
 	public event ActionEvent OnRemovePiece;
 	public event StateChangeEvent OnDraggingPieces;
@@ -44,7 +44,7 @@ public class SelectionManager : Manager {
 
 	void Start() {
 		RegisterPieceEvents();
-		selectionState = SelectionState.IDLE;
+		SelectionState = SelectionStates.IDLE;
 	}
 
 	void Update() {
@@ -73,7 +73,7 @@ public class SelectionManager : Manager {
 	/// </summary>
 	/// <param name="piece">The game piece that was just clicked down upon.</param>
 	public void HandleClickDown(GameObject piece) {
-		if(playerManager.playerState == PlayerManager.PlayerState.IDLE && selectionState == SelectionState.IDLE) {
+		if(playerManager.PlayerState == PlayerManager.PlayerStates.IDLE && SelectionState == SelectionStates.IDLE) {
 			AddPiece(piece);
 		}
 	}
@@ -83,7 +83,7 @@ public class SelectionManager : Manager {
 	/// </summary>
 	/// <param name="piece">The game piece that just had the mouse enter it.</param>
 	public void HandleOnMouseEnterPiece(GameObject piece) {
-		if(selectionState == SelectionState.DRAGGING_PIECES) {
+		if(SelectionState == SelectionStates.DRAGGING_PIECES) {
 			if(IsPreviousPiece(piece)) {
 				RemovePiece(piece);
 			} else {
@@ -96,7 +96,7 @@ public class SelectionManager : Manager {
 	/// Handles the mouse up.
 	/// </summary>
 	void HandleMouseUp() {
-		if(selectionState == SelectionState.DRAGGING_PIECES) {
+		if(SelectionState == SelectionStates.DRAGGING_PIECES) {
 			SubmitSelectedPieces();
 			if(OnDropPieces != null) {
 				OnDropPieces();
@@ -117,7 +117,7 @@ public class SelectionManager : Manager {
 		if(IsAcceptablePiece(piece)) {
 			selectedPieces.Add(piece);
 			if(OnAddPiece != null) {
-				OnAddPiece();
+				OnAddPiece(piece);
 			}
 			TriggerDraggingPiecesState();
 		}
@@ -130,7 +130,7 @@ public class SelectionManager : Manager {
 	void RemovePiece(GameObject piece) {
 		selectedPieces.RemoveAt(selectedPieces.Count - 1);
 		if(OnRemovePiece != null) {
-			OnRemovePiece();
+			OnRemovePiece(piece);
 		}
 	}
 
@@ -176,10 +176,7 @@ public class SelectionManager : Manager {
 	/// <returns><c>true</c> if this instance is already selected and present in the selection list; otherwise, <c>false</c>.</returns>
 	/// <param name="piece">The game piece to check.</param>
 	public bool IsAlreadySelected(GameObject piece) {
-		if(selectedPieces.IndexOf(piece) > -1) {
-			return true;
-		}
-		return false;
+		return selectedPieces.IndexOf(piece) > -1;
 	}
 
 	/// <summary>
@@ -193,9 +190,9 @@ public class SelectionManager : Manager {
 		}
 		
 		GameObject otherPiece = selectedPieces[selectedPieces.Count-1];
-		GamePiece originalGamePiece = otherPiece.GetComponent(typeof (GamePiece)) as GamePiece;
-		GamePiece newGamePiece = piece.GetComponent(typeof (GamePiece)) as GamePiece;
-		if(Mathf.Abs(originalGamePiece.row - newGamePiece.row) <= 1 && Mathf.Abs(originalGamePiece.column - newGamePiece.column) <= 1) {
+		GamePiece originalGamePiece = otherPiece.GetComponent<GamePiece>();
+		GamePiece newGamePiece = piece.GetComponent<GamePiece>();
+		if(Mathf.Abs(originalGamePiece.Row - newGamePiece.Row) <= 1 && Mathf.Abs(originalGamePiece.Column - newGamePiece.Column) <= 1) {
 			return true;
 		}
 		return false;
@@ -216,10 +213,7 @@ public class SelectionManager : Manager {
 	/// </summary>
 	/// <returns><c>true</c> if the selection list has no pieces; otherwise, <c>false</c>.</returns>
 	public bool HasNoPieces() {
-		if (selectedPieces.Count == 0) {
-			return true;
-		}
-		return false;
+		return selectedPieces.Count == 0;
 	}
 
 	#endregion
@@ -230,8 +224,8 @@ public class SelectionManager : Manager {
 	/// Triggers the Dragging Pieces selection state, and emits an event
 	/// </summary>
 	void TriggerDraggingPiecesState() {
-		if(selectionState != SelectionState.DRAGGING_PIECES) {
-			selectionState = SelectionState.DRAGGING_PIECES;
+		if(SelectionState != SelectionStates.DRAGGING_PIECES) {
+			SelectionState = SelectionStates.DRAGGING_PIECES;
 			if(OnDraggingPieces != null) {
 				OnDraggingPieces();
 			}
@@ -242,8 +236,8 @@ public class SelectionManager : Manager {
 	/// Triggers the Idle selection state, and emits an event
 	/// </summary>
 	void TriggerIdleState() {
-		if(selectionState != SelectionState.IDLE) {
-			selectionState = SelectionState.IDLE;
+		if(SelectionState != SelectionStates.IDLE) {
+			SelectionState = SelectionStates.IDLE;
 			if(OnIdle != null) {
 				OnIdle();
 			}

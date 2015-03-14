@@ -1,12 +1,8 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-
-public class PlayerManager : Manager {
+﻿public class PlayerManager : Manager {
 
 	#region States
-	public enum PlayerState {WAITING, IDLE, ACTIONING};
-	public  PlayerState playerState { get; private set; }
+	public enum PlayerStates {WAITING, IDLE, ACTIONING};
+	public  PlayerStates PlayerState { get; private set; }
 	public GameObject _gamePieceManager;
 	public GameObject _selectionManager;
 	#endregion
@@ -113,8 +109,8 @@ public class PlayerManager : Manager {
 	/// Triggers the actioning player state and emits an event
 	/// </summary>
 	void TriggerActioningState() {
-		if(playerState != PlayerState.ACTIONING) {
-			playerState = PlayerState.ACTIONING;
+		if(PlayerState != PlayerStates.ACTIONING) {
+			PlayerState = PlayerStates.ACTIONING;
 			if(OnActioningStateChange != null) {
 				OnActioningStateChange();
 			}
@@ -125,8 +121,8 @@ public class PlayerManager : Manager {
 	/// Triggers the idle player state and emits an event
 	/// </summary>
 	void TriggerIdleState() {
-		if(playerState != PlayerState.IDLE) {
-			playerState = PlayerState.IDLE;
+		if(PlayerState != PlayerStates.IDLE) {
+			PlayerState = PlayerStates.IDLE;
 			if(OnIdleStateChange != null) {
 				OnIdleStateChange();
 			}
@@ -137,8 +133,8 @@ public class PlayerManager : Manager {
 	/// Triggers the waiting player state, and emits an event
 	/// </summary>
 	void TriggerWaitState() {
-		if(playerState != PlayerState.WAITING) {
-			playerState = PlayerState.WAITING;
+		if(PlayerState != PlayerStates.WAITING) {
+			PlayerState = PlayerStates.WAITING;
 			if(OnWaitingStateChange != null) {
 				OnWaitingStateChange();
 			}

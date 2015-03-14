@@ -81,7 +81,7 @@ public class GamePieceGenerator : Generator {
 
 		newPiece = CreateElement(newPiece, startX, startY);
 		gamePieceManager.RegisterPiece(newPiece);
-		gamePieceManager.MovePiece(newPiece, x, y, endX, endY);
+		GamePieceManager.MovePiece(newPiece, x, y, endX, endY);
 
 	}
 
