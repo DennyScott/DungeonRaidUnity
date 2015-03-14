@@ -1,8 +1,10 @@
-﻿public class PlayerManager : Manager {
+﻿using UnityEngine;
+
+public class PlayerManager : Manager {
 
 	#region States
 	public enum PlayerStates {WAITING, IDLE, ACTIONING};
-	public  PlayerStates PlayerState { get; private set; }
+	public PlayerStates PlayerState { get; private set; }
 	public GameObject _gamePieceManager;
 	public GameObject _selectionManager;
 	#endregion
