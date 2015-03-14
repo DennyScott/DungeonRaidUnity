@@ -192,9 +192,9 @@ public class SelectionManager : MonoBehaviour {
 		}
 		
 		GameObject otherPiece = selectedPieces[selectedPieces.Count-1];
-		GamePiece originalGamePiece = otherPiece.GetComponent(typeof (GamePiece)) as GamePiece;
-		GamePiece newGamePiece = piece.GetComponent(typeof (GamePiece)) as GamePiece;
-		if(Mathf.Abs(originalGamePiece.row - newGamePiece.row) <= 1 && Mathf.Abs(originalGamePiece.column - newGamePiece.column) <= 1) {
+		GamePiece originalGamePiece = otherPiece.GetComponent<GamePiece>();
+		GamePiece newGamePiece = piece.GetComponent<GamePiece>();
+		if(Mathf.Abs(originalGamePiece.Row - newGamePiece.Row) <= 1 && Mathf.Abs(originalGamePiece.Column - newGamePiece.Column) <= 1) {
 			return true;
 		}
 		return false;

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class GamePieceManager : MonoBehaviour {
@@ -35,7 +34,7 @@ public class GamePieceManager : MonoBehaviour {
 	/// </summary>
 	/// <param name="piece">Game Piece to Register</param>
 	public void RegisterPiece(GameObject piece) {
-		GamePiece gamePiece = piece.GetComponent(typeof (GamePiece)) as GamePiece;
+		var gamePiece = piece.GetComponent<GamePiece>();
 		gamePiece.OnClickDown += HandleOnClickDown;
 		gamePiece.OnClickUp += HandleOnClickUp;
 		gamePiece.OnMouseEnterPiece += HandleOnMouseEnterPiece;
@@ -45,7 +44,7 @@ public class GamePieceManager : MonoBehaviour {
 	}
 
 	public void UnRegisterPiece(GameObject piece) {
-		GamePiece gamePiece = piece.GetComponent(typeof (GamePiece)) as GamePiece;
+		var gamePiece = piece.GetComponent<GamePiece>();
 		gamePiece.OnClickDown -= HandleOnClickDown;
 		gamePiece.OnClickUp -= HandleOnClickUp;
 		gamePiece.OnMouseEnterPiece -= HandleOnMouseEnterPiece;
@@ -130,8 +129,8 @@ public class GamePieceManager : MonoBehaviour {
 	/// <param name="y">The y coordinate to start at.</param>
 	/// <param name="positionX">The x position to end at</param>
 	/// <param name="positionY">The y position to end at</param>
-	public void MovePiece(GameObject piece, int x, int y, float positionX, float positionY) {
-		GamePiece gamePiece = piece.GetComponent(typeof (GamePiece)) as GamePiece;
+	public static void MovePiece(GameObject piece, int x, int y, float positionX, float positionY) {
+		var gamePiece = piece.GetComponent<GamePiece>();
 		gamePiece.SetPosition(x, y);
 		gamePiece.StartLerp(new Vector3 (positionX, positionY, 0.0f));
 	}
