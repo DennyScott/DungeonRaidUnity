@@ -19,12 +19,14 @@ public class GamePieceGenerator : MonoBehaviour {
 	#region Private Variables
 	private GamePieceManager gamePieceManager;
 	private Level level;
+	private GameObject dynamicObjects;
 
 	#endregion
 
 	#region Standard Methods
 	public void Awake() {
 		level = GameObject.FindGameObjectWithTag("Level").GetComponent(typeof (Level)) as Level;
+		dynamicObjects = GameObject.FindWithTag("DynamicObjects");
 	}
 
 	#endregion
@@ -56,6 +58,7 @@ public class GamePieceGenerator : MonoBehaviour {
 		newGraphic.transform.parent = newPiece.transform;
 		newGraphic.transform.position = new Vector3(0, 0, 0);
 		newPiece.transform.position = new Vector3(x, y, 0.0f);
+		newPiece.transform.parent = dynamicObjects.transform;
 		return newPiece;
 	}
 
@@ -71,17 +74,18 @@ public class GamePieceGenerator : MonoBehaviour {
 		float endX = startX;
 		float endY = (float)y - 4 + offset;
 		int r = Random.Range(0, 4);
-		GameObject newPiece = new GameObject();
+		GameObject newPiece = airElement;
 		if(r == 0) {
-			newPiece = CreateElement(airElement, startX, startY);
+			newPiece = airElement;
 		} else if (r == 1) {
-			newPiece = CreateElement(waterElement, startX, startY);
+			newPiece = waterElement;
 		} else if (r == 2) {
-			newPiece = CreateElement(fireElement, startX, startY);
+			newPiece = fireElement;
 		} else if (r == 3) {
-			newPiece = CreateElement(earthElement, startX, startY);
+			newPiece = earthElement;
 		}
 
+		newPiece = CreateElement(newPiece, startX, startY);
 		gamePieceManager.RegisterPiece(newPiece);
 		gamePieceManager.MovePiece(newPiece, x, y, endX, endY);
 
