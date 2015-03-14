@@ -15,5 +15,7 @@ Resources/*.asset.*
 /*.pidb
 /*.booproj
 
+*.sublime-workspace
+
 #Unity3D Generated File On Crash Reports
 sysinfo.txt

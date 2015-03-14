@@ -46,8 +46,7 @@ public class SelectionManager : MonoBehaviour {
 	#endregion
 
 	#region Event and Manager Registration
-
-
+	
 	/// <summary>
 	/// Gets the managers.
 	/// </summary>

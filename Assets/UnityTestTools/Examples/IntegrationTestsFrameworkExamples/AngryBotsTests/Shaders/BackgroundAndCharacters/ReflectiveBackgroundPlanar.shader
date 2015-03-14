@@ -1,3 +1,5 @@
+// Upgrade NOTE: commented out 'half4 unity_LightmapST', a built-in variable
+
 // Upgrade NOTE: commented out 'sampler2D unity_Lightmap', a built-in variable
 // Upgrade NOTE: replaced tex2D unity_Lightmap with UNITY_SAMPLE_TEX2D
 
@@ -62,7 +64,7 @@ SubShader {
 		CGPROGRAM
 		
 		half4 _MainTex_ST;
-		half4 unity_LightmapST;
+		// half4 unity_LightmapST;
 		// sampler2D unity_Lightmap;		
 				
 		v2f_full vert (appdata_full v) 
@@ -117,7 +119,7 @@ SubShader {
 		CGPROGRAM	
 		
 		half4 _MainTex_ST;
-		half4 unity_LightmapST;
+		// half4 unity_LightmapST;
 		// sampler2D unity_Lightmap;			
 		
 		v2f vert (appdata_full v) 

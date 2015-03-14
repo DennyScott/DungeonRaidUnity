@@ -1,0 +1,14 @@
+{
+    "folders":
+    [
+        {
+            "file_exclude_patterns":
+            [
+                "*.meta"
+            ],
+            "follow_symlinks": true,
+            "path": "."
+        }
+    ],
+    "solution_file": "./DungeonRaid.sln"
+}
