@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Slot {
 
 	#region Private Variables
 	private int x;	//The X coord of the this slot in the game board
 	private int y;	//The Y coord of the this slot in the game board
+	private GameObject piece; //The game piece this slot is holding
 	#endregion
 
 	#region Public Variables
-	public GameObject piece; //The game piece this slot is holding
 	#endregion
 
 	#region Constructors
@@ -33,11 +32,10 @@ public class Slot {
 	/// </summary>
 	/// <returns><c>true</c> if game piece is empty; otherwise, <c>false</c>.</returns>
 	public bool IsEmpty() {
-		if (piece == null) {
-			return true;
-		}
-		return false;
+		return piece == null;
 	}
+
+	public GameObject Piece {get; set;}
 
 	#endregion
 }

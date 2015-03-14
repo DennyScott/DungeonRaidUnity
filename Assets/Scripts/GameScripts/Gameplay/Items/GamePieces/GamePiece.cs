@@ -8,12 +8,11 @@ public class GamePiece : Mediator {
 	private Vector3 endPosition;
 	private float startTime;
 	private float journeyLength;
-
+	private int _row;
+	private int _column;
 	#endregion
 
 	#region Public Variables
-	private int _row;
-	private int _column;
 	public float _speed = 1.0F;
 	public float _smooth = 5.0F;
 
