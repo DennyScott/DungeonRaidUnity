@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class WorldManager : Manager {
+﻿public class WorldManager : Manager {
 
 	#region Private Variables
 	private Generators generators;
@@ -11,8 +8,8 @@ public class WorldManager : Manager {
 
 	#region Standard Methods
 	void Awake () {
-		generators = GetComponent(typeof (Generators)) as Generators;
-		managers = GetComponent(typeof (Managers)) as Managers;
+		generators = gameObject.GetComponent<Generators>();
+		managers = GetComponent<Managers>();
 		generators.GetGenerators();
 		managers.GetManagers();
 		Managers.gameBoardManager.CreateBoard();
