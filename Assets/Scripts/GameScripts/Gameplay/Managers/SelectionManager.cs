@@ -4,10 +4,15 @@ using System.Collections.Generic;
 
 public class SelectionManager : Manager {
 
+	#region Public Variables
+	public GameObject _gamePieceManager;
+	public GameObject _playerManager;
+	#endregion
+
 	#region Private Variables
 	private PlayerManager playerManager;
 	private List<GameObject> selectedPieces = new List<GameObject>();
-
+	private GamePieceManager gamePieceManager;
 	#endregion
 
 	#region States
@@ -32,8 +37,12 @@ public class SelectionManager : Manager {
 	#endregion
 
 	#region Standard Methods
+	void Awake() {
+		gamePieceManager = _gamePieceManager.GetComponent<GamePieceManager>();
+		playerManager = _playerManager.GetComponent<PlayerManager>();
+	}
+
 	void Start() {
-		GetManagers();
 		RegisterPieceEvents();
 		selectionState = SelectionState.IDLE;
 	}
@@ -46,19 +55,11 @@ public class SelectionManager : Manager {
 	#endregion
 
 	#region Event and Manager Registration
-	
-	/// <summary>
-	/// Gets the managers.
-	/// </summary>
-	void GetManagers() {
-		playerManager = Managers.playerManager;
-	}
 
 	/// <summary>
 	/// Registers the piece events to thier event handlers.
 	/// </summary>
 	void RegisterPieceEvents() {
-		GamePieceManager gamePieceManager = Managers.gamePieceManager;
 		gamePieceManager.OnClickDown += HandleClickDown;
 		gamePieceManager.OnMouseEnterPiece += HandleOnMouseEnterPiece;
 	}

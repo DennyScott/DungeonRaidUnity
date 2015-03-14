@@ -4,9 +4,13 @@ using System.Collections.Generic;
 
 public class GameBoardManager : Manager{
 
+	#region Public Variables
+	public GameObject gamePieceManager;
+	#endregion
+
 	#region Private Variables
 	private GameBoardModel model;
-
+	private GamePieceGenerator gamePieceGenerator;
 	#endregion
 
 	#region Public Variables
@@ -14,6 +18,16 @@ public class GameBoardManager : Manager{
 	public int columns = 8;
 	public float minWaitTimePerRow = 0.15f;
 	public float waitTimePerPiece = 0.05f;
+	#endregion
+
+	#region Standard Methods
+	void Awake() {
+		gamePieceGenerator = gamePieceManager.GetComponent<GamePieceGenerator>();
+	}
+
+	void Start() {
+		CreateBoard();
+	}
 	#endregion
 
 	#region Create Board Methods
@@ -39,7 +53,7 @@ public class GameBoardManager : Manager{
 			for(int x = 0; x < columns; x++) {
 
 				if(model.IsEmpty(x, y)) {
-					Generators.GamePieceGenerator.CreatePiece(x, y);
+					gamePieceGenerator.CreatePiece(x, y);
 					timeOnRow += waitTimePerPiece;
 					yield return new WaitForSeconds(waitTimePerPiece);
 				}

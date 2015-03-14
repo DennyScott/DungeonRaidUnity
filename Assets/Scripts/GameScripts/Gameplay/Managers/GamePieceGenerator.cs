@@ -16,30 +16,18 @@ public class GamePieceGenerator : Generator {
 	#endregion
 
 	#region Private Variables
-	private GamePieceManager gamePieceManager;
 	private Level level;
 	private GameObject dynamicObjects;
-
+	private GamePieceManager gamePieceManager;
 	#endregion
 
 	#region Standard Methods
 	public void Awake() {
 		level = GameObject.FindGameObjectWithTag("Level").GetComponent(typeof (Level)) as Level;
 		dynamicObjects = GameObject.FindWithTag("DynamicObjects");
+		gamePieceManager = gameObject.GetComponent<GamePieceManager>();
 	}
 
-	#endregion
-
-	#region Event and Manager Registration
-	/// <summary>
-	/// Checks to see if the managers have been initalized, if not, it will initalize them
-	/// </summary>
-	void CheckManagers() {
-		if(gamePieceManager == null) {
-			gamePieceManager = Managers.gamePieceManager;
-		}
-	}
-	
 	#endregion
 
 	#region Create GamePiece
@@ -67,7 +55,6 @@ public class GamePieceGenerator : Generator {
 	/// <param name="x">The x coordinate.</param>
 	/// <param name="y">The y coordinate.</param>
 	public void CreatePiece(int x, int y) {
-		CheckManagers();
 		float startX = (float) x - 4 + _offset;
 		const float startY = 5.0f;
 		float endX = startX;

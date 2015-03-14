@@ -7,12 +7,18 @@ public class PlayerManager : Manager {
 	#region States
 	public enum PlayerState {WAITING, IDLE, ACTIONING};
 	public  PlayerState playerState { get; private set; }
-
+	public GameObject _gamePieceManager;
+	public GameObject _selectionManager;
 	#endregion
 
 	#region Delegates
 	public delegate void StateChangeEvent();
 
+	#endregion
+
+	#region Private Variables
+	private GamePieceManager gamePieceManager;
+	private SelectionManager selectionManager;
 	#endregion
 
 	#region Events
@@ -23,6 +29,11 @@ public class PlayerManager : Manager {
 	#endregion
 
 	#region Standard Methods
+	void Awake() {
+		gamePieceManager = _gamePieceManager.GetComponent<GamePieceManager>();
+		selectionManager = _selectionManager.GetComponent<SelectionManager>();
+	}
+
 	void Start() {
 		RegisterEvents();
 	}
@@ -34,8 +45,6 @@ public class PlayerManager : Manager {
 	/// Registers the events to their event handlers.
 	/// </summary>
 	void RegisterEvents() {
-		GamePieceManager gamePieceManager = Managers.gamePieceManager;
-		SelectionManager selectionManager = Managers.selectionManager;
 		gamePieceManager.OnPiecesMoving += HandleOnPiecesMoving;
 		gamePieceManager.OnPiecesStopped += HandleOnPiecesStopped;
 		selectionManager.OnDropPieces += HandleOnDropPieces;
