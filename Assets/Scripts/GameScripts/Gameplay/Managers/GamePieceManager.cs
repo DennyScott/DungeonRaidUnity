@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class GamePieceManager : MonoBehaviour {
+public class GamePieceManager : Manager {
 
 	#region Private Variables
 	//List of object currently moving

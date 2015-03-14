@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerManager : MonoBehaviour {
+public class PlayerManager : Manager {
 
 	#region States
 	public enum PlayerState {WAITING, IDLE, ACTIONING};

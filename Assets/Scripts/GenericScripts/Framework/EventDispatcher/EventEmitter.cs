@@ -5,7 +5,7 @@ using System.Collections;
 /// EventEmitter is used to attach Scripts to the Global PubSub System. If a script
 /// inherits from this script, the class can make publish and subscription calls.
 /// </summary>
-public abstract class EventEmitter : MonoBehaviour {
+public abstract class EventEmitter : AdvMonoBehaviour {
 
 	/// <summary>
 	/// Subscribe to an event in the pub sub dictionaries. This will attach

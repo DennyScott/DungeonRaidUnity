@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Element : MonoBehaviour {
+public class Element : Mediator {
 
 	#region Private Variables
 	private ElementModel model;

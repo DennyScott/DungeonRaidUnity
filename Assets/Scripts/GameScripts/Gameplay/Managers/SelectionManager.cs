@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class SelectionManager : MonoBehaviour {
+public class SelectionManager : Manager {
 
 	#region Private Variables
 	private PlayerManager playerManager;

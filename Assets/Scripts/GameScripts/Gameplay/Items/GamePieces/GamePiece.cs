@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GamePiece : MonoBehaviour {
+public class GamePiece : Mediator {
 	
 	#region Private Variables
 	private bool isLerping;

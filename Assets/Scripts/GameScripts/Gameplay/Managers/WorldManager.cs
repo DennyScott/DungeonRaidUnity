@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WorldManager : MonoBehaviour {
+public class WorldManager : Manager {
 
 	#region Private Variables
 	private Generators generators;
