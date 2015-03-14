@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 
 public class SelectionManager : Manager {
@@ -17,13 +16,14 @@ public class SelectionManager : Manager {
 	#endregion
 
 	#region Delegates
-	public delegate void ActionEvent();
+	public delegate void ActionEvent(GameObject g);
+	public delegate void TriggerEvent();
 	public delegate void StateChangeEvent();
 
 	#endregion
 
 	#region Events
-	public event ActionEvent OnDropPieces;
+	public event TriggerEvent OnDropPieces;
 	public event ActionEvent OnAddPiece;
 	public event ActionEvent OnRemovePiece;
 	public event StateChangeEvent OnDraggingPieces;
@@ -72,7 +72,7 @@ public class SelectionManager : Manager {
 	/// </summary>
 	/// <param name="piece">The game piece that was just clicked down upon.</param>
 	public void HandleClickDown(GameObject piece) {
-		if(playerManager.playerState == PlayerManager.PlayerState.IDLE && SelectionState == SelectionStates.IDLE) {
+		if(playerManager.PlayerState == PlayerManager.PlayerStates.IDLE && SelectionState == SelectionStates.IDLE) {
 			AddPiece(piece);
 		}
 	}
@@ -116,7 +116,7 @@ public class SelectionManager : Manager {
 		if(IsAcceptablePiece(piece)) {
 			selectedPieces.Add(piece);
 			if(OnAddPiece != null) {
-				OnAddPiece();
+				OnAddPiece(piece);
 			}
 			TriggerDraggingPiecesState();
 		}
@@ -129,7 +129,7 @@ public class SelectionManager : Manager {
 	void RemovePiece(GameObject piece) {
 		selectedPieces.RemoveAt(selectedPieces.Count - 1);
 		if(OnRemovePiece != null) {
-			OnRemovePiece();
+			OnRemovePiece(piece);
 		}
 	}
 
@@ -175,10 +175,7 @@ public class SelectionManager : Manager {
 	/// <returns><c>true</c> if this instance is already selected and present in the selection list; otherwise, <c>false</c>.</returns>
 	/// <param name="piece">The game piece to check.</param>
 	public bool IsAlreadySelected(GameObject piece) {
-		if(selectedPieces.IndexOf(piece) > -1) {
-			return true;
-		}
-		return false;
+		return selectedPieces.IndexOf(piece) > -1;
 	}
 
 	/// <summary>
@@ -215,10 +212,7 @@ public class SelectionManager : Manager {
 	/// </summary>
 	/// <returns><c>true</c> if the selection list has no pieces; otherwise, <c>false</c>.</returns>
 	public bool HasNoPieces() {
-		if (selectedPieces.Count == 0) {
-			return true;
-		}
-		return false;
+		return selectedPieces.Count == 0;
 	}
 
 	#endregion
