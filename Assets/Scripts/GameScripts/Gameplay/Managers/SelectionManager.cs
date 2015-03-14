@@ -11,8 +11,8 @@ public class SelectionManager : Manager {
 	#endregion
 
 	#region States
-	public enum SelectionState {IDLE, DRAGGING_PIECES};
-	public  SelectionState selectionState { get; private set; }
+	public enum SelectionStates {IDLE, DRAGGING_PIECES};
+	public SelectionStates SelectionState { get; private set; }
 
 	#endregion
 
@@ -35,7 +35,7 @@ public class SelectionManager : Manager {
 	void Start() {
 		GetManagers();
 		RegisterPieceEvents();
-		selectionState = SelectionState.IDLE;
+		SelectionState = SelectionStates.IDLE;
 	}
 
 	void Update() {
@@ -72,7 +72,7 @@ public class SelectionManager : Manager {
 	/// </summary>
 	/// <param name="piece">The game piece that was just clicked down upon.</param>
 	public void HandleClickDown(GameObject piece) {
-		if(playerManager.playerState == PlayerManager.PlayerState.IDLE && selectionState == SelectionState.IDLE) {
+		if(playerManager.playerState == PlayerManager.PlayerState.IDLE && SelectionState == SelectionStates.IDLE) {
 			AddPiece(piece);
 		}
 	}
@@ -82,7 +82,7 @@ public class SelectionManager : Manager {
 	/// </summary>
 	/// <param name="piece">The game piece that just had the mouse enter it.</param>
 	public void HandleOnMouseEnterPiece(GameObject piece) {
-		if(selectionState == SelectionState.DRAGGING_PIECES) {
+		if(SelectionState == SelectionStates.DRAGGING_PIECES) {
 			if(IsPreviousPiece(piece)) {
 				RemovePiece(piece);
 			} else {
@@ -95,7 +95,7 @@ public class SelectionManager : Manager {
 	/// Handles the mouse up.
 	/// </summary>
 	void HandleMouseUp() {
-		if(selectionState == SelectionState.DRAGGING_PIECES) {
+		if(SelectionState == SelectionStates.DRAGGING_PIECES) {
 			SubmitSelectedPieces();
 			if(OnDropPieces != null) {
 				OnDropPieces();
@@ -229,8 +229,8 @@ public class SelectionManager : Manager {
 	/// Triggers the Dragging Pieces selection state, and emits an event
 	/// </summary>
 	void TriggerDraggingPiecesState() {
-		if(selectionState != SelectionState.DRAGGING_PIECES) {
-			selectionState = SelectionState.DRAGGING_PIECES;
+		if(SelectionState != SelectionStates.DRAGGING_PIECES) {
+			SelectionState = SelectionStates.DRAGGING_PIECES;
 			if(OnDraggingPieces != null) {
 				OnDraggingPieces();
 			}
@@ -241,8 +241,8 @@ public class SelectionManager : Manager {
 	/// Triggers the Idle selection state, and emits an event
 	/// </summary>
 	void TriggerIdleState() {
-		if(selectionState != SelectionState.IDLE) {
-			selectionState = SelectionState.IDLE;
+		if(SelectionState != SelectionStates.IDLE) {
+			SelectionState = SelectionStates.IDLE;
 			if(OnIdle != null) {
 				OnIdle();
 			}
