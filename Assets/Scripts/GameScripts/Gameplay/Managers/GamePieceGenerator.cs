@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-public class GamePieceGenerator : MonoBehaviour {
+public class GamePieceGenerator : Generator {
 
 	#region Public Varables
 	public GameObject _airElement;

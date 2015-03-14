@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameBoardManager : MonoBehaviour{
+public class GameBoardManager : Manager{
 
 	#region Private Variables
 	private GameBoardModel model;
