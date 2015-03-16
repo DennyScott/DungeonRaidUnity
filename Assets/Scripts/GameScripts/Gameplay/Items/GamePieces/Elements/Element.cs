@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-public class Element : Mediator {
+﻿public class Element : Mediator {
 
 	#region Private Variables
 	private ElementModel model;
@@ -9,11 +6,11 @@ public class Element : Mediator {
 
 	#region Element Types
 	public enum Elements{AIR, EARTH, WATER, FIRE};
-	public Elements elementType;
+	public Elements _elementType;
 	#endregion
 
 	#region Public Variables
-	public bool isMoving = true;
+	public bool _isMoving = true;
 	#endregion
 
 	#region Standard Methods
