@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
-public class GamePiece : Mediator {
-
+public class GamePiece : Grunt {
+	
 	#region Private Variables
 	private bool isLerping;
 	private Vector3 startPosition;
@@ -32,15 +32,15 @@ public class GamePiece : Mediator {
 	public event GamePieceEvent OnStopLerp;
 	public event GamePieceEvent OnRemovePiece;
 	#endregion
-
+	
 	#region Standard Methods
-	void FixedUpdate() {
+	void FixedUpdate () {
 		if (isLerping) {
 			float distCovered = (Time.time - startTime) * _speed;
 			float fracJourney = distCovered / journeyLength;
 			transform.position = Vector3.Lerp(startPosition, endPosition, fracJourney);
 
-			if (fracJourney >= 1.0f) {
+			if(fracJourney>=1.0f) {
 				StopLerp();
 			}
 		}
@@ -64,7 +64,7 @@ public class GamePiece : Mediator {
 	/// </summary>
 	public void StopLerp() {
 		isLerping = false;
-		if (OnStopLerp != null) {
+		if(OnStopLerp != null) {
 			OnStopLerp(gameObject);
 		}
 	}
@@ -79,13 +79,69 @@ public class GamePiece : Mediator {
 		this.endPosition = endPosition;
 		startTime = Time.time;
 		journeyLength = Vector3.Distance(startPosition, this.endPosition);
-		if (OnStartLerp != null) {
+		if(OnStartLerp != null) {
 			OnStartLerp(gameObject);
+		}
+	}
+
+	/// <summary>
+	/// 	Used to remove a piece from the gameboard
+	/// </summary>
+	public void RemovePiece() {
+		TriggerOnRemovePiece();
+		Destroy(gameObject);
+	}
+	#endregion
+
+	#region Event Handling
+
+	/// <summary>
+	/// Raises the mouse down event, and emits the OnClickDown event.
+	/// </summary>
+	void OnMouseDown() {
+		if(OnClickDown != null) {
+			OnClickDown(gameObject);
+		}
+	}
+
+	/// <summary>
+	/// Raises the mouse up event and emits the OnClickUp event.
+	/// </summary>
+	void OnMouseUp() {
+		if(OnClickUp != null) {
+			OnClickUp(gameObject);
+		}
+	}
+
+	/// <summary>
+	/// Raises the mouse enter event, and emits the OnMouseEnterPiece event.
+	/// </summary>
+	void OnMouseEnter() {
+		if(OnMouseEnterPiece != null) {
+			OnMouseEnterPiece(gameObject);
+		}
+	}
+
+	/// <summary>
+	/// Raises the mouse exit event, and emits the OnMouseExitPiece event.
+	/// </summary>
+	void OnMouseExit() {
+		if(OnMouseExitPiece != null) {
+			OnMouseExitPiece(gameObject);
+		}
+	}
+
+	/// <summary>
+	/// 	Removes the gameObject from the board, and calls all listening handlers
+	/// </summary>
+	void TriggerOnRemovePiece() {
+		if(OnRemovePiece != null) {
+			OnRemovePiece(gameObject);
 		}
 	}
 	#endregion
 
-	public int Row { get; set; }
+	public int Row {get; set;}
 
-	public int Column { get; set; }
+	public int Column{get; set;}
 }

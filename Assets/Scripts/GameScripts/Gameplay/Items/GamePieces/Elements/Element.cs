@@ -1,4 +1,4 @@
-﻿public class Element : Mediator {
+﻿public class Element : Grunt {
 
 	#region Private Variables
 	private ElementModel model;
