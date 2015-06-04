@@ -1,5 +1,5 @@
 using UnityEngine;
 
-public abstract class Generator : EventEmitter {
+public abstract class Generator : AdvMonoBehaviour {
 	
 }

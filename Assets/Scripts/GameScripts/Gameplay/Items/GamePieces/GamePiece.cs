@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GamePiece : Mediator {
+public class GamePiece : Grunt {
 	
 	#region Private Variables
 	private bool isLerping;
