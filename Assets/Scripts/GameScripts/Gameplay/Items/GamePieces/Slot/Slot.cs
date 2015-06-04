@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Slot piece for a grid square, on the Grid board. This slot can contain
+/// a piece, or be empty.
+/// </summary>
 public partial class Slot {
 
 	#region Private Variables
