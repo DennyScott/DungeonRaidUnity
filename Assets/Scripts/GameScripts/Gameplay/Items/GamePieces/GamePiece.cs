@@ -2,23 +2,19 @@
 
 public class GamePiece : Grunt {
 
+	#region Auto Properties
 	public int Row { get; set; }
 
 	public int Column { get; set; }
 
-
-
-	#region Delegates
-	public delegate void GamePieceEvent(GameObject g);
-
 	#endregion
 
 	#region Events
-	public event GamePieceEvent OnClickDown;
-	public event GamePieceEvent OnClickUp;
-	public event GamePieceEvent OnMouseEnterPiece;
-	public event GamePieceEvent OnMouseExitPiece;
-	public event GamePieceEvent OnRemovePiece;
+	public System.Action<GameObject> OnClickDown;
+	public System.Action<GameObject> OnClickUp;
+	public System.Action<GameObject> OnMouseEnterPiece;
+	public System.Action<GameObject> OnMouseExitPiece;
+	public System.Action<GameObject> OnRemovePiece;
 	#endregion
 
 	#region Public Methods

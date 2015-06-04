@@ -8,7 +8,7 @@ public class GamePieceMovement : Grunt {
 	public float Smooth = 5.0F;
 	#endregion
 
-	#region Delatgates
+	#region Actions
 	public System.Action<GameObject> OnGamePieceStartMove;
 	public System.Action<GameObject> OnGamePieceStopMove;
 	#endregion
