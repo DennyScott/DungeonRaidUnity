@@ -5,7 +5,8 @@ public class Mouse : Grunt {
 
     Vector3 pos;
     Vector3 scale = new Vector3(1,1,1);
-    
+    private bool clicked;
+    public static int attack;
 
     // Use this for initialization
     void Start() {
@@ -18,15 +19,25 @@ public class Mouse : Grunt {
     }
 
     void OnMouseDown() {
-        if (clicked) {
-            Debug.Log("Clicked, " + scale);
+        if (!clicked) {
+            scale += new Vector3(0.5f, 0.5f, 0);
+            clicked = true;
+            attack++;
 
-            pos += Vector3.forward;
-            scale += new Vector3(0.5f, 0.5f, 0.5f);
-
-            this.gameObject.transform.position = pos;
             this.gameObject.transform.localScale = scale;
+            Debug.Log(clicked);
+            Debug.Log(attack);
         }
+        else if(clicked) {
+            scale -= new Vector3(0.5f, 0.5f, 0);
+            clicked = false;
+            attack--;
+
+            this.gameObject.transform.localScale = scale;
+            Debug.Log(clicked);
+            Debug.Log(attack);
+        }
+
 
 
     }
