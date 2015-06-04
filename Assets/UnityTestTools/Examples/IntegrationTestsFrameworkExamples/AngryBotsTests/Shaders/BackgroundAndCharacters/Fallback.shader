@@ -1,5 +1,4 @@
 // Upgrade NOTE: commented out 'half4 unity_LightmapST', a built-in variable
-
 // Upgrade NOTE: commented out 'sampler2D unity_Lightmap', a built-in variable
 // Upgrade NOTE: replaced tex2D unity_Lightmap with UNITY_SAMPLE_TEX2D
 
