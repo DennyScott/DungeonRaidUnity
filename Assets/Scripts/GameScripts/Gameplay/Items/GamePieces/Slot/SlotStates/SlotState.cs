@@ -2,6 +2,6 @@
 using System.Collections;
 
 public enum SlotStates {
-	Normal,
+	Filled,
 	Empty
 };
