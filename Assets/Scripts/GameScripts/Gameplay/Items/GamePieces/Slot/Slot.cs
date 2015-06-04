@@ -5,10 +5,13 @@ public partial class Slot {
 	#region Private Variables
 	private int x;	//The X coord of the this slot in the game board
 	private int y;	//The Y coord of the this slot in the game board
-	private GameObject piece; //The game piece this slot is holding
+	private GameObject piece;
 	#endregion
 
-	
+	#region Actions and Funcs
+	public System.Action<GameObject> OnPieceAdded, OnPieceRemoved;
+	#endregion
+
 	private FSM<SlotStates, ConcreteState> slotStateMachine;
 
 	#region Public Variables
@@ -24,6 +27,9 @@ public partial class Slot {
 	public Slot(int x, int y) {
 		this.x = x;
 		this.y = y;
+		slotStateMachine = new FSM<SlotStates, ConcreteState>();
+		InitalizeSlotStates();
+		slotStateMachine.SetCurrentState(SlotStates.Empty);
 	}
 
 	#endregion
@@ -38,7 +44,46 @@ public partial class Slot {
 		return slotStateMachine.isCurrentState(SlotStates.Empty);
 	}
 
-	public GameObject Piece {get; set;}
+	/// <summary>
+	/// Get or Set the piece. If the piece is set, we pass responsibility
+	/// to the current state of the slot.
+	/// </summary>
+	public GameObject Piece {
+		get { return piece; }
+		set {
+			slotStateMachine.CurrentState.AddPiece(value);
+		}
+	}
+
+	/// <summary>
+	/// Remove the current piece. Pass the responsibility to the current state.
+	/// </summary>
+	public void RemovePiece() {
+		slotStateMachine.CurrentState.RemovePiece();
+	}
+
+	#endregion
+
+	#region Triggers
+
+	/// <summary>
+	/// Game piece was added to the slot.
+	/// </summary>
+	private void TriggerOnPieceAdded() {
+		if (OnPieceAdded != null) {
+			OnPieceAdded(piece);
+		}
+	}
+
+	/// <summary>
+	/// Game piece was removed from the slot.
+	/// </summary>
+	/// <param name="g">Gameobject that was removed.</param>
+	private void TriggerOnPieceRemoved(GameObject g) {
+		if (OnPieceRemoved != null) {
+			OnPieceRemoved(g);
+		}
+	}
 
 	#endregion
 }
