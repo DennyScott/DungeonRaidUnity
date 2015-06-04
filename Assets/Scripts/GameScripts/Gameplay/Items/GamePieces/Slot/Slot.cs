@@ -8,6 +8,9 @@ public class Slot {
 	private GameObject piece; //The game piece this slot is holding
 	#endregion
 
+	
+	private StateMachine<SlotState> slotStateMachine;
+
 	#region Public Variables
 	#endregion
 

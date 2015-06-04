@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Level : MonoBehaviour {
+public class Level : Grunt {
 
 	#region Public Variables
 	public LevelModel model;
