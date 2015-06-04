@@ -47,5 +47,9 @@ public class FSM<TEnum, T> where T : IFSMState {
         }
     }
 
+	public bool isCurrentState(TEnum state) {
+		return CurrentStateName.Equals(state);
+	}
+
     #endregion
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Slot {
+public partial class Slot {
 
 	#region Private Variables
 	private int x;	//The X coord of the this slot in the game board
@@ -9,7 +9,7 @@ public class Slot {
 	#endregion
 
 	
-	private StateMachine<SlotState> slotStateMachine;
+	private FSM<SlotStates, ConcreteState> slotStateMachine;
 
 	#region Public Variables
 	#endregion
@@ -35,7 +35,7 @@ public class Slot {
 	/// </summary>
 	/// <returns><c>true</c> if game piece is empty; otherwise, <c>false</c>.</returns>
 	public bool IsEmpty() {
-		return piece == null;
+		return slotStateMachine.isCurrentState(SlotStates.Empty);
 	}
 
 	public GameObject Piece {get; set;}
