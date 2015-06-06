@@ -33,4 +33,40 @@ public class GamePiece : Grunt {
 			OnRemovePiece(gameObject);
 		}
 	}
+
+	/// <summary>
+	/// Raises the mouse down event, and emits the OnClickDown event.
+	/// </summary>
+	void OnMouseDown() {
+		if (OnClickDown != null) {
+			OnClickDown(gameObject);
+		}
+	}
+
+	/// <summary>
+	/// Raises the mouse up event and emits the OnClickUp event.
+	/// </summary>
+	void OnMouseUp() {
+		if (OnClickUp != null) {
+			OnClickUp(gameObject);
+		}
+	}
+
+	/// <summary>
+	/// Raises the mouse enter event, and emits the OnMouseEnterPiece event.
+	/// </summary>
+	void OnMouseEnter() {
+		if (OnMouseEnterPiece != null) {
+			OnMouseEnterPiece(gameObject);
+		}
+	}
+
+	/// <summary>
+	/// Raises the mouse exit event, and emits the OnMouseExitPiece event.
+	/// </summary>
+	void OnMouseExit() {
+		if (OnMouseExitPiece != null) {
+			OnMouseExitPiece(gameObject);
+		}
+	}
 }
