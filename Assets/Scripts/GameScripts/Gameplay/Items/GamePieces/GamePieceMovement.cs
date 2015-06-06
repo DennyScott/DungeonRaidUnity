@@ -4,7 +4,7 @@ using System.Collections;
 public class GamePieceMovement : Grunt {
 
 	#region Public Variables
-	public float Speed = 1.0F;
+	public float Speed = 5.0F;
 	public float Smooth = 5.0F;
 	#endregion
 
@@ -43,7 +43,7 @@ public class GamePieceMovement : Grunt {
 		}
 
 		//Start the coroutine to move down
-		while (fracJourney >= 1.0f) {
+		while (fracJourney < 1.0f) {
 			distCovered = (Time.time - startTime) * Speed;
 			fracJourney = distCovered / journeyLength;
 			transform.position = Vector3.Lerp(startPosition, endPosition, fracJourney);

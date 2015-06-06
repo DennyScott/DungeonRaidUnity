@@ -5,7 +5,7 @@ public class GamePieceManager : Manager {
 
 	#region Private Variables
 	//List of object currently moving
-	private List<GameObject> movingObjects = new List<GameObject>();
+	private readonly List<GameObject> _movingObjects = new List<GameObject>();
 	
 	#endregion
 
@@ -63,8 +63,8 @@ public class GamePieceManager : Manager {
 	/// </summary>
 	/// <param name="g">The gameObject that has just stopped lerping.</param>
 	void HandleOnGamePieceStopMove(GameObject g) {
-		movingObjects.Remove(g);
-		if(movingObjects.Count == 0 && OnPiecesStopped != null) {
+		_movingObjects.Remove(g);
+		if(_movingObjects.Count == 0 && OnPiecesStopped != null) {
 			OnPiecesStopped();
 		}
 	}
@@ -74,7 +74,7 @@ public class GamePieceManager : Manager {
 	/// </summary>
 	/// <param name="g">The gameObject that has just started lerping.</param>
 	void HandleOnGamePieceStartMove(GameObject g) {
-		movingObjects.Add(g);
+		_movingObjects.Add(g);
 		if(OnGamePieceStartMove != null) {
 			OnGamePieceStartMove(g);
 		}

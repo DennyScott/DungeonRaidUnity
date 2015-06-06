@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400002}
   - 65: {fileID: 6500000}
+  - 114: {fileID: 11457364}
   m_Layer: 0
   m_Name: GamePiece
   m_TagString: Piece
@@ -52,8 +53,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcf37becf0dac4639902beda41b8b7c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 4
-  _smooth: 5
+--- !u!114 &11457364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c70fe5209f020f9428ec0dab5c551a68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Speed: 5
+  Smooth: 5
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
