@@ -28,6 +28,9 @@ public class GamePiece : Grunt {
 
 	#endregion
 
+	/// <summary>
+	/// When a piece is removed, this will call the delegate Action
+	/// </summary>
 	void TriggerOnRemovePiece() {
 		if (OnRemovePiece != null) {
 			OnRemovePiece(gameObject);
