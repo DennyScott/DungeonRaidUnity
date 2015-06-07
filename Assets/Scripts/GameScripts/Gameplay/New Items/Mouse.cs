@@ -3,39 +3,28 @@ using System.Collections;
 
 public class Mouse : Grunt {
 
-    Vector3 pos;
-    Vector3 scale = new Vector3(1,1,1);
-    private bool clicked;
-    public static int attack;
+    Vector3 _scale = new Vector3(1,1,1);
+    private bool _clicked;
+    public static int Attack;
 
-    // Use this for initialization
-    void Start() {
-        pos = transform.position;
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
-
+	/// <summary>
+	/// Called when the presses the mouse button down. Changes the scale
+	/// of the object depending on the previous scale. I.e. large -> small, or
+	/// small -> large.
+	/// </summary>
     void OnMouseDown() {
-        if (!clicked) {
-            scale += new Vector3(0.5f, 0.5f, 0);
-            clicked = true;
-            attack++;
-
-            this.gameObject.transform.localScale = scale;
-            Debug.Log(clicked);
-            Debug.Log(attack);
+        if (!_clicked) {
+            _scale += new Vector3(0.5f, 0.5f, 0);
+            _clicked = true;
+            Attack++;
         }
-        else if(clicked) {
-            scale -= new Vector3(0.5f, 0.5f, 0);
-            clicked = false;
-            attack--;
-
-            this.gameObject.transform.localScale = scale;
-            Debug.Log(clicked);
-            Debug.Log(attack);
+        else if(_clicked) {
+            _scale -= new Vector3(0.5f, 0.5f, 0);
+            _clicked = false;
+            Attack--;
+			
         }
+		
+       gameObject.transform.localScale = _scale;
     }
 }
