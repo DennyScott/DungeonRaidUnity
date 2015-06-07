@@ -24,25 +24,26 @@ public partial class SelectionManager {
 			SelectionManager = selectionManager;
 		}
 
-		public virtual void OnEntry() {
-			
-		}
+		public virtual void OnEntry() {}
 
-		public virtual void OnExit() {
-			
-		}
+		public virtual void OnExit() {}
 
-		public virtual void HandleOnMouseEnterPiece(GameObject piece) {
+		/// <summary>
+		/// Handles when the mouse enters a piece given
+		/// </summary>
+		/// <param name="piece">The piece the mouse just entered</param>
+		public virtual void HandleOnMouseEnterPiece(GameObject piece) {}
 
-		}
+		/// <summary>
+		/// Handles when the mouse button is released
+		/// </summary>
+		public virtual void HandleMouseUp() {}
 
-		public virtual void HandleMouseUp() {
-			
-		}
-
-		public virtual void HandleClickDown(GameObject piece) {
-			
-		}
+		/// <summary>
+		/// Handles when the mouse is clicked down on the given piece
+		/// </summary>
+		/// <param name="piece">The peice clicked</param>
+		public virtual void HandleClickDown(GameObject piece) {}
 
 		/// <summary>
 		/// Adds the piece to the selection list.
