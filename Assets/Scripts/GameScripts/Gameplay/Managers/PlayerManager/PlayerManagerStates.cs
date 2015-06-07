@@ -1,4 +1,6 @@
-﻿public partial class PlayerManager {
+﻿using UnityEngine;
+
+public partial class PlayerManager {
 
 	/// <summary>
 	/// Initalize the PlayerAction StateMachine.
