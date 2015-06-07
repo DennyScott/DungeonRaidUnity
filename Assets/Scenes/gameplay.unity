@@ -455,8 +455,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adfa8cb6cb45d47f69fd60b541c8348e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gamePieceManager: {fileID: 492068204}
-  _selectionManager: {fileID: 1629676495}
 --- !u!1 &898732193
 GameObject:
   m_ObjectHideFlags: 0
@@ -593,6 +591,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1133038861}
+  - 114: {fileID: 1133038859}
   m_Layer: 0
   m_Name: Management
   m_TagString: Untagged
@@ -600,6 +599,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1133038859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1133038858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b55d6f42913974185e4b8df2f96e18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1133038861
 Transform:
   m_ObjectHideFlags: 0
@@ -814,8 +824,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cfac879f093c4b95b68422d25af1ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gamePieceManager: {fileID: 492068204}
-  _playerManager: {fileID: 794607911}
 --- !u!1 &1701220215
 GameObject:
   m_ObjectHideFlags: 0
