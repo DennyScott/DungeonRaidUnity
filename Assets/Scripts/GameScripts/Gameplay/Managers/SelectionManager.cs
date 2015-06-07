@@ -73,7 +73,7 @@ public class SelectionManager : Manager {
 	/// </summary>
 	/// <param name="piece">The game piece that was just clicked down upon.</param>
 	public void HandleClickDown(GameObject piece) {
-		if(playerManager.PlayerState == PlayerManager.PlayerStates.IDLE && SelectionState == SelectionStates.IDLE) {
+		if(playerManager.PlayerActionFsm.isCurrentState(PlayerManager.PlayerStates.Idle) && SelectionState == SelectionStates.IDLE) {
 			AddPiece(piece);
 		}
 	}
