@@ -37,8 +37,5 @@ public class Mouse : Grunt {
             Debug.Log(clicked);
             Debug.Log(attack);
         }
-
-
-
     }
 }
