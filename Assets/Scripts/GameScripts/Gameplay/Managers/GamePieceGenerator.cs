@@ -4,28 +4,28 @@ using System.Collections.Generic;
 public class GamePieceGenerator : Generator {
 
 	#region Public Varables
-	public GameObject _airElement;
-	public GameObject _fireElement;
-	public GameObject _earthElement;
-	public GameObject _waterElement;
-	public GameObject _gamePiece;
-	public float _blockSpacing;
-	public float _offset = 0.5f;
-	public List<GameObject> _positions;
+	public GameObject AirElement;
+	public GameObject FireElement;
+	public GameObject EarthElement;
+	public GameObject WaterElement;
+	public GameObject GamePiece;
+	public float BlockSpacing;
+	public float Offset = 0.5f;
+	public List<GameObject> Positions;
 
 	#endregion
 
 	#region Private Variables
-	private Level level;
-	private GameObject dynamicObjects;
-	private GamePieceManager gamePieceManager;
+	private Level _level;
+	private GameObject _dynamicObjects;
+	private GamePieceManager _gamePieceManager;
 	#endregion
 
 	#region Standard Methods
 	public void Awake() {
-		level = GameObject.FindGameObjectWithTag("Level").GetComponent(typeof (Level)) as Level;
-		dynamicObjects = GameObject.FindWithTag("DynamicObjects");
-		gamePieceManager = gameObject.GetComponent<GamePieceManager>();
+		_level = GameObject.FindGameObjectWithTag("Level").GetComponent(typeof (Level)) as Level;
+		_dynamicObjects = GameObject.FindWithTag("DynamicObjects");
+		_gamePieceManager = gameObject.GetComponent<GamePieceManager>();
 	}
 
 	#endregion
@@ -40,12 +40,12 @@ public class GamePieceGenerator : Generator {
 	/// <param name="x">The x coordinate.</param>
 	/// <param name="y">The y coordinate.</param>
 	private GameObject CreateElement(GameObject element, float x, float y) {
-		var newPiece = Instantiate(_gamePiece);
+		var newPiece = Instantiate(GamePiece);
 		var newGraphic = Instantiate(element);
 		newGraphic.transform.parent = newPiece.transform;
 		newGraphic.transform.position = new Vector3(0, 0, 0);
 		newPiece.transform.position = new Vector3(x, y, 0.0f);
-		newPiece.transform.parent = dynamicObjects.transform;
+		newPiece.transform.parent = _dynamicObjects.transform;
 		return newPiece;
 	}
 
@@ -55,32 +55,32 @@ public class GamePieceGenerator : Generator {
 	/// <param name="x">The x coordinate.</param>
 	/// <param name="y">The y coordinate.</param>
 	public void CreatePiece(int x, int y) {
-		float startX = (float) x - 4 + _offset;
+		var startX = (float) x - 4 + Offset;
 		const float startY = 5.0f;
-		float endX = startX;
-		float endY = (float)y - 4 + _offset;
-		int r = Random.Range(0, 4);
+		var endX = startX;
+		var endY = (float)y - 4 + Offset;
+		var r = Random.Range(0, 4);
 		GameObject newPiece;
 		switch (r) {
 			case 0:
-				newPiece = _airElement;
+				newPiece = AirElement;
 				break;
 			case 1:
-				newPiece = _waterElement;
+				newPiece = WaterElement;
 				break;
 			case 2:
-				newPiece = _fireElement;
+				newPiece = FireElement;
 				break;
 			case 3:
-				newPiece = _earthElement;
+				newPiece = EarthElement;
 				break;
 			default:
-			  	newPiece = _airElement;
+			  	newPiece = AirElement;
 				break;
 		}
 
 		newPiece = CreateElement(newPiece, startX, startY);
-		gamePieceManager.RegisterPiece(newPiece);
+		_gamePieceManager.RegisterPiece(newPiece);
 		GamePieceManager.MovePiece(newPiece, x, y, endX, endY);
 
 	}

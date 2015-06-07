@@ -1,21 +1,21 @@
 ﻿public class Element : Grunt {
 
 	#region Private Variables
-	private ElementModel model;
+	private ElementModel _model;
 	#endregion
 
 	#region Element Types
-	public enum Elements{AIR, EARTH, WATER, FIRE};
-	public Elements _elementType;
+	public enum Elements{Air, Earth, Water, Fire};
+	public Elements ElementType;
 	#endregion
 
 	#region Public Variables
-	public bool _isMoving = true;
+	public bool IsMoving = true;
 	#endregion
 
 	#region Standard Methods
 	void Awake() {
-		model = new ElementModel();
+		_model = new ElementModel();
 	}	
 	#endregion
 }

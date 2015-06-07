@@ -4,25 +4,22 @@ using System.Collections.Generic;
 
 public class GameBoardManager : Manager{
 
-	#region Public Variables
-	public GameObject gamePieceManager;
-	#endregion
-
 	#region Private Variables
-	private GameBoardModel model;
-	private GamePieceGenerator gamePieceGenerator;
+	private GameBoardModel _model;
+	private GamePieceGenerator _gamePieceGenerator;
 	#endregion
 
 	#region Public Variables
-	public int rows = 8;
-	public int columns = 8;
-	public float minWaitTimePerRow = 0.15f;
-	public float waitTimePerPiece = 0.05f;
+	public GameObject GamePieceManager;
+	public int Rows = 8;
+	public int Columns = 8;
+	public float MinWaitTimePerRow = 0.15f;
+	public float WaitTimePerPiece = 0.05f;
 	#endregion
 
 	#region Standard Methods
 	void Awake() {
-		gamePieceGenerator = gamePieceManager.GetComponent<GamePieceGenerator>();
+		_gamePieceGenerator = GamePieceManager.GetComponent<GamePieceGenerator>();
 	}
 
 	void Start() {
@@ -36,8 +33,8 @@ public class GameBoardManager : Manager{
 	/// Creates the board and then beings filling it.
 	/// </summary>
 	public void CreateBoard() {
-		model = new GameBoardModel(rows, columns);
-		StartCoroutine("FillBoard");
+		_model = new GameBoardModel(Rows, Columns);
+		StartCoroutine(FillBoard());
 	}
 	#endregion
 
@@ -48,18 +45,19 @@ public class GameBoardManager : Manager{
 	/// </summary>
 	/// <returns>Coroutine Enumerator</returns>
 	IEnumerator FillBoard() {
-		for(int y = 0; y < rows; y++) {
-			float timeOnRow = 0.0f;
-			for(int x = 0; x < columns; x++) {
-
-				if(model.IsEmpty(x, y)) {
-					gamePieceGenerator.CreatePiece(x, y);
-					timeOnRow += waitTimePerPiece;
-					yield return new WaitForSeconds(waitTimePerPiece);
+		yield return new WaitForSeconds(1.0f);
+		for(var y = 0; y < Rows; y++) {
+			var timeOnRow = 0.0f;
+			for(var x = 0; x < Columns; x++) {
+				if (!_model.IsEmpty(x, y)) {
+					continue;
 				}
+				_gamePieceGenerator.CreatePiece(x, y);
+				timeOnRow += WaitTimePerPiece;
+				yield return new WaitForSeconds(WaitTimePerPiece);
 			}
-			if(timeOnRow < minWaitTimePerRow) {
-				yield return new WaitForSeconds(minWaitTimePerRow - timeOnRow);
+			if(timeOnRow < MinWaitTimePerRow) {
+				yield return new WaitForSeconds(MinWaitTimePerRow - timeOnRow);
 			}
 		}
 

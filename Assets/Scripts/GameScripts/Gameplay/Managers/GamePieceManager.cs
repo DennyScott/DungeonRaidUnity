@@ -5,26 +5,20 @@ public class GamePieceManager : Manager {
 
 	#region Private Variables
 	//List of object currently moving
-	private List<GameObject> movingObjects = new List<GameObject>();
+	private readonly List<GameObject> _movingObjects = new List<GameObject>();
 	
 	#endregion
 
-	#region Delegates
-	public delegate void GamePieceEvent(GameObject g);
-	public delegate void MovementEvent();
-
-	#endregion
-
 	#region Events
-	public event GamePieceEvent OnClickDown;
-	public event GamePieceEvent OnClickUp;
-	public event GamePieceEvent OnMouseEnterPiece;
-	public event GamePieceEvent OnMouseExitPiece;
-	public event GamePieceEvent OnStartLerp;
-	public event GamePieceEvent OnStopLerp;
-	public event GamePieceEvent OnRemovePiece;
-	public event MovementEvent OnPiecesMoving;
-	public event MovementEvent OnPiecesStopped;
+	public System.Action<GameObject> OnClickDown;
+	public System.Action<GameObject> OnClickUp;
+	public System.Action<GameObject> OnMouseEnterPiece;
+	public System.Action<GameObject> OnMouseExitPiece;
+	public System.Action<GameObject> OnGamePieceStartMove;
+	public System.Action<GameObject> OnGamePieceStopMove;
+	public System.Action<GameObject> OnRemovePiece;
+	public System.Action OnPiecesMoving;
+	public System.Action OnPiecesStopped;
 
 	#endregion
 
@@ -35,21 +29,23 @@ public class GamePieceManager : Manager {
 	/// <param name="piece">Game Piece to Register</param>
 	public void RegisterPiece(GameObject piece) {
 		var gamePiece = piece.GetComponent<GamePiece>();
+		var gpMovement = piece.GetComponent<GamePieceMovement>();
 		gamePiece.OnClickDown += HandleOnClickDown;
 		gamePiece.OnClickUp += HandleOnClickUp;
 		gamePiece.OnMouseEnterPiece += HandleOnMouseEnterPiece;
-		gamePiece.OnStartLerp += HandleOnStartLerp;
-		gamePiece.OnStopLerp += HandleOnStopLerp;
+		gpMovement.OnGamePieceStartMove += HandleOnGamePieceStartMove;
+		gpMovement.OnGamePieceStopMove += HandleOnGamePieceStopMove;
 		gamePiece.OnRemovePiece += HandleOnRemovePiece;
 	}
 
 	public void UnRegisterPiece(GameObject piece) {
 		var gamePiece = piece.GetComponent<GamePiece>();
+		var gpMovement = piece.GetComponent<GamePieceMovement>();
 		gamePiece.OnClickDown -= HandleOnClickDown;
 		gamePiece.OnClickUp -= HandleOnClickUp;
 		gamePiece.OnMouseEnterPiece -= HandleOnMouseEnterPiece;
-		gamePiece.OnStartLerp -= HandleOnStartLerp;
-		gamePiece.OnStopLerp -= HandleOnStopLerp;
+		gpMovement.OnGamePieceStartMove -= HandleOnGamePieceStartMove;
+		gpMovement.OnGamePieceStopMove -= HandleOnGamePieceStopMove;
 		gamePiece.OnRemovePiece -= HandleOnRemovePiece;
 	}
 
@@ -66,9 +62,9 @@ public class GamePieceManager : Manager {
 	/// Handles the on stop lerp event.
 	/// </summary>
 	/// <param name="g">The gameObject that has just stopped lerping.</param>
-	void HandleOnStopLerp (GameObject g) {
-		movingObjects.Remove(g);
-		if(movingObjects.Count == 0 && OnPiecesStopped != null) {
+	void HandleOnGamePieceStopMove(GameObject g) {
+		_movingObjects.Remove(g);
+		if(_movingObjects.Count == 0 && OnPiecesStopped != null) {
 			OnPiecesStopped();
 		}
 	}
@@ -77,10 +73,10 @@ public class GamePieceManager : Manager {
 	/// Handles the on start lerp event.
 	/// </summary>
 	/// <param name="g">The gameObject that has just started lerping.</param>
-	void HandleOnStartLerp (GameObject g) {
-		movingObjects.Add(g);
-		if(OnStartLerp != null) {
-			OnStartLerp(g);
+	void HandleOnGamePieceStartMove(GameObject g) {
+		_movingObjects.Add(g);
+		if(OnGamePieceStartMove != null) {
+			OnGamePieceStartMove(g);
 		}
 
 		if(OnPiecesMoving != null) {
@@ -131,8 +127,10 @@ public class GamePieceManager : Manager {
 	/// <param name="positionY">The y position to end at</param>
 	public static void MovePiece(GameObject piece, int x, int y, float positionX, float positionY) {
 		var gamePiece = piece.GetComponent<GamePiece>();
-		gamePiece.SetPosition(x, y);
-		gamePiece.StartLerp(new Vector3 (positionX, positionY, 0.0f));
+		var gpMovement = piece.GetComponent<GamePieceMovement>();
+		gamePiece.Row = x;
+		gamePiece.Column = y;
+		gpMovement.StartLerp(new Vector3(positionX, positionY, 0.0f));
 	}
 
 	#endregion
