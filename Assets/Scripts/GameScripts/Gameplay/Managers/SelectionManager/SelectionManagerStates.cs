@@ -198,7 +198,7 @@ public partial class SelectionManager {
 		/// <param name="piece"></param>
 		public override void HandleClickDown(GameObject piece) {
 			base.HandleClickDown(piece);
-			if (SelectionManager.PlayerManager.PlayerActionFsm.isCurrentState(PlayerManager.PlayerStates.Idle)) {
+			if (SelectionManager._playerManager.PlayerActionFsm.isCurrentState(PlayerManager.PlayerStates.Idle)) {
 				AddPiece(piece);
 			}
 		}

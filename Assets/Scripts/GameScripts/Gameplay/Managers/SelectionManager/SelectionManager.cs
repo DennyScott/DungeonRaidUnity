@@ -5,8 +5,8 @@ public partial class SelectionManager : Manager {
 
 	#region Public Variables
 
-	public GamePieceManager GamePieceManager;
-	public PlayerManager PlayerManager;
+	private GamePieceManager _gamePieceManager;
+	private PlayerManager _playerManager;
 
 	#endregion
 
@@ -40,6 +40,8 @@ public partial class SelectionManager : Manager {
 	#region Standard Methods
 
 	private void Start() {
+		_gamePieceManager = Managers.GamePieceManager;
+		_playerManager = Managers.PlayerManager;
 		RegisterPieceEvents();
 		InitalizeStates();
 	}
@@ -58,8 +60,8 @@ public partial class SelectionManager : Manager {
 	/// Registers the piece events to thier event handlers.
 	/// </summary>
 	private void RegisterPieceEvents() {
-		GamePieceManager.OnClickDown += HandleClickDown;
-		GamePieceManager.OnMouseEnterPiece += HandleOnMouseEnterPiece;
+		_gamePieceManager.OnClickDown += HandleClickDown;
+		_gamePieceManager.OnMouseEnterPiece += HandleOnMouseEnterPiece;
 	}
 
 	#endregion
