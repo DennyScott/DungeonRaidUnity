@@ -21,11 +21,32 @@ public partial class PlayerManager : Manager {
 	/// Registers the events to their event handlers.
 	/// </summary>
 	void RegisterEvents() {
-		Managers.GamePieceManager.OnPiecesMoving += PlayerActionFsm.CurrentState.OnWaitForTurn;
-		Managers.GamePieceManager.OnPiecesStopped += PlayerActionFsm.CurrentState.OnStartTurn;
-		Managers.SelectionManager.OnDropPieces += PlayerActionFsm.CurrentState.OnWaitForTurn;
-		Managers.SelectionManager.OnDraggingPieces += PlayerActionFsm.CurrentState.OnDragPiece;
-		Managers.SelectionManager.OnIdle += PlayerActionFsm.CurrentState.OnStartTurn;
+		Managers.GamePieceManager.OnPiecesMoving += HandleOnWaitTurn;
+		Managers.GamePieceManager.OnPiecesStopped += HandleOnStartTurn;
+		Managers.SelectionManager.OnDropPieces += HandleOnWaitTurn;
+		Managers.SelectionManager.OnDraggingPieces += HandleOnDragPiece;
+		Managers.SelectionManager.OnIdle += HandleOnStartTurn;
+	}
+
+	/// <summary>
+	/// Pass Wait Turn Logic to State
+	/// </summary>
+	void HandleOnWaitTurn() {
+		PlayerActionFsm.CurrentState.OnWaitForTurn();
+	}
+
+	/// <summary>
+	/// Pass Drag Piece Logic to State
+	/// </summary>
+	void HandleOnDragPiece() {
+		PlayerActionFsm.CurrentState.OnDragPiece();
+	}
+
+	/// <summary>
+	/// Pass Start Turn Logic to State
+	/// </summary>
+	void HandleOnStartTurn() {
+		PlayerActionFsm.CurrentState.OnStartTurn();
 	}
 
 	/// <summary>
