@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public partial class SelectionManager {
-
-	/// <summary>
+  
+    #region Initializer
+    /// <summary>
 	/// Intializes all states in the selection state FSM
 	/// </summary>
 	private void InitalizeStates() {
@@ -11,20 +11,25 @@ public partial class SelectionManager {
 		_selectionFsm.AddState(SelectionStates.DraggingPieces, new DragState(this));
 		_selectionFsm.SetCurrentState(SelectionStates.Idle);
 	}
+    #endregion
 
-
-	/// <summary>
+    /// <summary>
 	/// The ConcreteState class is the base state class for the selection manager selection state
 	/// </summary>
 	public abstract class ConcreteState : IFSMState {
 
-		protected SelectionManager SelectionManager;
+        #region Protected Methods
+        protected SelectionManager SelectionManager;
+        #endregion
 
-		protected ConcreteState(SelectionManager selectionManager) {
+        #region Constructor
+        protected ConcreteState(SelectionManager selectionManager) {
 			SelectionManager = selectionManager;
 		}
+        #endregion
 
-		public virtual void OnEntry() {}
+        #region Virtual Methods
+        public virtual void OnEntry() {}
 
 		public virtual void OnExit() {}
 
@@ -45,7 +50,10 @@ public partial class SelectionManager {
 		/// <param name="piece">The peice clicked</param>
 		public virtual void HandleClickDown(GameObject piece) {}
 
-		/// <summary>
+        #endregion
+
+        #region Protected Methods
+        /// <summary>
 		/// Adds the piece to the selection list.
 		/// </summary>
 		/// <param name="piece">The game piece to add to the selection list</param>
@@ -72,9 +80,11 @@ public partial class SelectionManager {
 			}
 		}
 
-		#region Selection List Helper Methods
+        #endregion
 
-		/// <summary>
+        #region Selection List Helper Methods
+
+        /// <summary>
 		/// Determines whether this instance is the previous piece of the selection list.
 		/// </summary>
 		/// <returns><c>true</c> if this instance is the previous piece of the selection list; otherwise, <c>false</c>.</returns>
@@ -183,7 +193,8 @@ public partial class SelectionManager {
 	/// </summary>
 	public class IdleState : ConcreteState {
 
-		/// <summary>
+        #region Constructor
+        /// <summary>
 		/// The constructor for the IdleState class
 		/// </summary>
 		/// <param name="selectionManager"></param>
@@ -192,7 +203,11 @@ public partial class SelectionManager {
 
 		}
 
-		/// <summary>
+        #endregion
+
+
+        #region Event Handlers
+        /// <summary>
 		/// Overrides the HandleClickDown method
 		/// </summary>
 		/// <param name="piece"></param>
@@ -201,15 +216,18 @@ public partial class SelectionManager {
 			if (SelectionManager._playerManager.PlayerActionFsm.isCurrentState(PlayerManager.PlayerStates.Idle)) {
 				AddPiece(piece);
 			}
-		}
-	}
+        }
+
+        #endregion
+    }
 
 	/// <summary>
 	/// Used when the SelectionManager has changed to be dragging rather then Idle
 	/// </summary>
 	public class DragState : ConcreteState {
 
-		/// <summary>
+        #region Constructor
+        /// <summary>
 		/// Constructor for the DragState class
 		/// </summary>
 		/// <param name="selectionManager"></param>
@@ -218,7 +236,10 @@ public partial class SelectionManager {
 
 		}
 
-		/// <summary>
+        #endregion
+
+        #region Event Handlers
+        /// <summary>
 		/// Overrides the HandleOnMouseEnterPiece class
 		/// </summary>
 		/// <param name="piece">The gamepiece that the mouse is over</param>
@@ -241,6 +262,8 @@ public partial class SelectionManager {
 				SelectionManager.OnDropPieces();
 			}
 			TriggerIdleState();
-		}
-	}
+        }
+
+        #endregion
+    }
 }
