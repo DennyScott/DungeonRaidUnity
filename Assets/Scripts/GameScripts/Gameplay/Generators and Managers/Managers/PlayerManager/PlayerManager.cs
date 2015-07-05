@@ -9,7 +9,10 @@ public partial class PlayerManager : Manager {
 	#endregion
 
 	#region Standard Methods
-	void Start() {
+    /// <summary>
+    /// Initializes the class
+    /// </summary>
+	public override void Initialize() {
 		InitializeStates();
 		PlayerActionFsm.SetCurrentState(PlayerStates.Idle);
 		RegisterEvents();

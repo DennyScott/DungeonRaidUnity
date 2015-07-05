@@ -19,10 +19,14 @@ public partial class SelectionManager {
 	public abstract class ConcreteState : IFSMState {
 
         #region Protected Methods
-        protected SelectionManager SelectionManager;
+        protected SelectionManager SelectionManager;    //The Selection Manager class this concrete state belongs to
         #endregion
 
         #region Constructor
+        /// <summary>
+        /// No Args Constructor
+        /// </summary>
+        /// <param name="selectionManager">The selection Manager that this concrete state belongs too</param>
         protected ConcreteState(SelectionManager selectionManager) {
 			SelectionManager = selectionManager;
 		}
@@ -58,14 +62,18 @@ public partial class SelectionManager {
 		/// </summary>
 		/// <param name="piece">The game piece to add to the selection list</param>
 		protected void AddPiece(GameObject piece) {
+            //If the piece is not acceptable to add to the selected list
 			if (!IsAcceptablePiece(piece)) {
 				return;
 			}
 
+            //Adds the piece to the selected list
 			SelectionManager._selectedPieces.Add(piece);
-			if (SelectionManager.OnAddPiece != null) {
-				SelectionManager.OnAddPiece(piece);
-			}
+
+            //Triggers the OnAddPiece Action
+            SelectionManager.TriggerOnAddPiece();
+
+            //Triggers the dragging state
 			TriggerDraggingPiecesState();
 		}
 
@@ -75,9 +83,7 @@ public partial class SelectionManager {
 		/// <param name="piece">the game piece to remove from the selected list</param>
 		protected void RemovePiece(GameObject piece) {
 			SelectionManager._selectedPieces.RemoveAt(SelectionManager._selectedPieces.Count - 1);
-			if (SelectionManager.OnRemovePiece != null) {
-				SelectionManager.OnRemovePiece(piece);
-			}
+		    SelectionManager.TriggerOnRemovePiece();
 		}
 
         #endregion
@@ -117,6 +123,7 @@ public partial class SelectionManager {
 		/// <returns><c>true</c> if this instance is in an acceptable range for the selection list; otherwise, <c>false</c>.</returns>
 		/// <param name="piece">The game piece to check.</param>
 		public bool IsAcceptableRange(GameObject piece) {
+            //If there are no pieces in selection, any piece is an acceptable piece
 			if (HasNoPieces()) {
 				return true;
 			}
@@ -154,9 +161,7 @@ public partial class SelectionManager {
 		/// </summary>
 		protected void TriggerDraggingPiecesState() {
 			SelectionManager._selectionFsm.SetCurrentState(SelectionStates.DraggingPieces);
-			if (SelectionManager.OnDraggingPieces != null) {
-				SelectionManager.OnDraggingPieces();
-			}
+			SelectionManager.TriggerOnDraggingPieces();
 		}
 
 		/// <summary>
@@ -164,9 +169,7 @@ public partial class SelectionManager {
 		/// </summary>
 		protected void TriggerIdleState() {
 			SelectionManager._selectionFsm.SetCurrentState(SelectionStates.Idle);
-			if (SelectionManager.OnIdle != null) {
-				SelectionManager.OnIdle();
-			}
+			SelectionManager.TriggerOnIdle();
 		}
 
 		#endregion
@@ -197,14 +200,13 @@ public partial class SelectionManager {
         /// <summary>
 		/// The constructor for the IdleState class
 		/// </summary>
-		/// <param name="selectionManager"></param>
+		/// <param name="selectionManager">The selectionManager that this state belongs too</param>
 		public IdleState(SelectionManager selectionManager)
 			: base(selectionManager) {
 
 		}
 
         #endregion
-
 
         #region Event Handlers
         /// <summary>
@@ -230,7 +232,7 @@ public partial class SelectionManager {
         /// <summary>
 		/// Constructor for the DragState class
 		/// </summary>
-		/// <param name="selectionManager"></param>
+		/// <param name="selectionManager">The selection manager this state belongs too</param>
 		public DragState(SelectionManager selectionManager)
 			: base(selectionManager) {
 
@@ -258,9 +260,7 @@ public partial class SelectionManager {
 		public override void HandleMouseUp() {
 			base.HandleMouseUp();
 			SubmitSelectedPieces();
-			if (SelectionManager.OnDropPieces != null) {
-				SelectionManager.OnDropPieces();
-			}
+			SelectionManager.TriggerOnDropPieces();
 			TriggerIdleState();
         }
 
