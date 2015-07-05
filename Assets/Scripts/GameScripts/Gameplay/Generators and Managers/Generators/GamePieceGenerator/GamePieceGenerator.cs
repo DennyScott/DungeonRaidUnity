@@ -24,9 +24,28 @@ public class GamePieceGenerator : Generator {
     #endregion
 
     #region Initialize Methods
+    /// <summary>
+    /// Initializes the generator
+    /// </summary>
     public override void Initialize() {
+        CreateContainer();
+        LoadManagersAndGenerators();
+    }
+
+    /// <summary>
+    /// Creates the container for these game pieces
+    /// </summary>
+    void CreateContainer() {
+        var dObjects = GameObject.FindGameObjectWithTag("DynamicObjects");
         _allPieces = new GameObject("GamePieces");
         _allPiecesTransform = _allPieces.transform;
+        _allPiecesTransform.parent = dObjects.transform;
+    }
+
+    /// <summary>
+    /// Loads all needed managers and gnerators
+    /// </summary>
+    void LoadManagersAndGenerators() {
         _gamePieceManager = Managers.GamePieceManager;
     }
 

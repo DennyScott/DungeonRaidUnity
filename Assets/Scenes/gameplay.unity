@@ -603,8 +603,8 @@ MonoBehaviour:
     Rows: 8
     Columns: 8
   _spawnDetails:
-    MinWaitTimePerRow: .150000006
-    WaitTimePerPiece: .0500000007
+    RowWaitTime: 0
+    PieceWaitTime: .0500000007
 --- !u!1 &982791622
 GameObject:
   m_ObjectHideFlags: 0

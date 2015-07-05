@@ -87,7 +87,7 @@ public partial class GamePiece : Grunt {
     /// <summary>
 	/// When a piece is removed, this will call the delegate Action
 	/// </summary>
-	void TriggerOnRemovePiece() {
+	protected void TriggerOnRemovePiece() {
 		if (OnRemovePiece != null) {
 			OnRemovePiece(gameObject);
 		}
@@ -96,7 +96,7 @@ public partial class GamePiece : Grunt {
 	/// <summary>
 	/// Raises the mouse down event, and emits the OnClickDown event.
 	/// </summary>
-	void OnMouseDown() {
+	protected void TriggerOnMouseDown() {
 		if (OnClickDown != null) {
 			OnClickDown(gameObject);
 		}
@@ -105,7 +105,7 @@ public partial class GamePiece : Grunt {
 	/// <summary>
 	/// Raises the mouse up event and emits the OnClickUp event.
 	/// </summary>
-	void OnMouseUp() {
+    protected void TriggerOnMouseUp() {
 		if (OnClickUp != null) {
 			OnClickUp(gameObject);
 		}
@@ -114,7 +114,7 @@ public partial class GamePiece : Grunt {
 	/// <summary>
 	/// Raises the mouse enter event, and emits the OnMouseEnterPiece event.
 	/// </summary>
-	void OnMouseEnter() {
+    protected void TriggerOnMouseEnter() {
 		if (OnMouseEnterPiece != null) {
 			OnMouseEnterPiece(gameObject);
 		}
@@ -123,7 +123,7 @@ public partial class GamePiece : Grunt {
 	/// <summary>
 	/// Raises the mouse exit event, and emits the OnMouseExitPiece event.
 	/// </summary>
-	void OnMouseExit() {
+    protected void TriggerOnMouseExit() {
 		if (OnMouseExitPiece != null) {
 			OnMouseExitPiece(gameObject);
 		}
