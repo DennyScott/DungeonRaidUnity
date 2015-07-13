@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public partial class Slot {
 
@@ -7,8 +6,9 @@ public partial class Slot {
 	/// Initalize the Slot States.
 	/// </summary>
 	private void InitalizeSlotStates() {
-		slotStateMachine.AddState(SlotStates.Filled, new FilledState(this));
-		slotStateMachine.AddState(SlotStates.Empty, new EmptyState(this));
+        _slotStateMachine.AddState(SlotStates.Filled, new FilledState(this));
+        _slotStateMachine.AddState(SlotStates.Empty, new EmptyState(this));
+        _slotStateMachine.SetCurrentState(SlotStates.Empty);
 	}
 
 	/// <summary>
@@ -34,9 +34,9 @@ public partial class Slot {
 		/// state to the empty state, and triggering a remove.
 		/// </summary>
 		public virtual void RemovePiece() {
-			var temp = Slot.piece;
-			Slot.piece = null;
-			Slot.slotStateMachine.SetCurrentState(SlotStates.Empty);
+			var temp = Slot.Piece;
+			Slot.Piece = null;
+            Slot._slotStateMachine.SetCurrentState(SlotStates.Empty);
 			Slot.OnPieceRemoved(temp);
 		}
 	}
@@ -73,10 +73,10 @@ public partial class Slot {
 		/// <param name="piece">Piece to be added</param>
 		public override void AddPiece(GameObject piece) {
 			//Add Piece
-			Slot.piece = piece;
+			Slot.Piece = piece;
 			
 			//Change to Normal State
-			Slot.slotStateMachine.SetCurrentState(SlotStates.Filled);
+            Slot._slotStateMachine.SetCurrentState(SlotStates.Filled);
 		}
 
 		public override void RemovePiece() {}

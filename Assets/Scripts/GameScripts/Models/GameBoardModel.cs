@@ -1,10 +1,12 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
+[Serializable]
 public class GameBoardModel {
 	#region Public Variables
 	//A List of a list of slots that will make up the gameboard
+    [SerializeField]
 	public List<List<Slot>> GameBoard;
 	#endregion
 
