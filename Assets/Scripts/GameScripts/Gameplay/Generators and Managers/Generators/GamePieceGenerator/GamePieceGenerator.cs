@@ -63,12 +63,10 @@ public class GamePieceGenerator : Generator {
     private GameObject CreateElement(GameObject element, float x, float y) {
         var newPiece = Instantiate(_gamePiece);
         var newGraphic = Instantiate(element);
-        var pTrans = newPiece.transform;
-        var gTrans = newGraphic.transform;
-        gTrans.parent = pTrans;
-        gTrans.position = Vector3.zero;
-        pTrans.position = new Vector3(x, y, 0.0f);
-        pTrans.parent = _allPiecesTransform;
+        newGraphic.transform.parent = newPiece.transform;
+        newGraphic.transform.position = Vector3.zero;
+        newPiece.transform.position = new Vector3(x, y, 0.0f);
+        newPiece.transform.parent = _allPiecesTransform;
         return newPiece;
     }
 

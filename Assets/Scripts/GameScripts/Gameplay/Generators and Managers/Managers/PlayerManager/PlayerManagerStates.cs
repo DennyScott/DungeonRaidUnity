@@ -9,6 +9,7 @@ public partial class PlayerManager {
 		PlayerActionFsm.AddState(PlayerStates.Idle, new IdleState(this));
 		PlayerActionFsm.AddState(PlayerStates.Actioning, new ActioningState(this));
 		PlayerActionFsm.AddState(PlayerStates.Waiting, new WaitingState(this));
+		PlayerActionFsm.SetCurrentState(PlayerStates.Idle);
 	}
 
 	

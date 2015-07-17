@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-
+﻿
 public partial class PlayerManager : Manager {
 
 	#region States
@@ -14,8 +13,11 @@ public partial class PlayerManager : Manager {
     /// </summary>
 	public override void Initialize() {
 		InitializeStates();
-		PlayerActionFsm.SetCurrentState(PlayerStates.Idle);
 		RegisterEvents();
+	}
+
+	public void OnDisable() {
+		DeregisterEvents();
 	}
 	#endregion
 

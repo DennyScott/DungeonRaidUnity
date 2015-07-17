@@ -2,7 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class GameBoardManager : Manager {
-    #region Private Variables
+   
+	#region Private Variables
 
     private GameBoardModel _model;                      //The model that controls where pieces are
     private GamePieceGenerator _gamePieceGenerator;     //The game piece generator that creates game pieces

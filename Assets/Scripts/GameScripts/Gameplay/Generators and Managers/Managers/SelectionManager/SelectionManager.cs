@@ -94,6 +94,10 @@ public partial class SelectionManager : Manager {
 		InitalizeStates();
     }
 
+	void OnDisable() {
+		UnRegisterPieceEvents();
+	}
+
     /// <summary>
     /// Collects all managers needed for this class
     /// </summary>
@@ -121,6 +125,11 @@ public partial class SelectionManager : Manager {
 	private void RegisterPieceEvents() {
 		_gamePieceManager.OnClickDown += HandleClickDown;
 		_gamePieceManager.OnMouseEnterPiece += HandleOnMouseEnterPiece;
+	}
+
+	private void UnRegisterPieceEvents() {
+		_gamePieceManager.OnClickDown -= HandleClickDown;
+		_gamePieceManager.OnMouseEnterPiece -= HandleOnMouseEnterPiece;
 	}
 
 	#endregion

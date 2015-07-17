@@ -186,11 +186,7 @@ public partial class SelectionManager {
         /// Submits the selected pieces in the selection list to be destroyed.
         /// </summary>
         protected void SubmitSelectedPieces() {
-            //Need to add Submission Code
-            foreach (var piece in SelectionManager._selectedPieces) {
-                //piece.Action	
-                Debug.Log(piece.transform.GetChild(0).name);
-            }
+			SelectionManager._selectedPieces.ForEach(t => Debug.Log(t.transform.GetChild(0).name));
             SelectionManager._selectedPieces.Clear();
         }
 
